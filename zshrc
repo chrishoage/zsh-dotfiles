@@ -41,7 +41,16 @@ COMPLETION_WAITING_DOTS="true"
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$HOME/.zsh-custom
 
-plugins=(git brew nvm npm z rsync sublime osx common-aliases web-search functions aliases)
+plugins=(git nvm npm rsync sublime common-aliases web-search functions aliases)
+
+case `uname` in
+  Darwin)
+    plugins=(brew z osx $plugins)
+    ;;
+  Linux)
+    plugins=(debian $plugins)
+    ;;
+esac
 
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export MANPATH="/usr/local/man:$MANPATH"
