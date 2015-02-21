@@ -43,7 +43,7 @@ ZSH_CUSTOM=$HOME/.zsh-custom
 
 plugins=(git brew nvm npm rsync sublime osx common-aliases web-search functions aliases)
 
-export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export MANPATH="/usr/local/man:$MANPATH"
 
 #nvm config
