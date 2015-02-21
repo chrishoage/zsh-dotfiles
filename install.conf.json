@@ -5,6 +5,7 @@
   {
     "link": {
       "~/.dotfiles": "",
+      "~/.hushlogin": "hushlogin",
       "~/.oh-my-zsh": "oh-my-zsh/",
        "~/.zshrc": "zshrc",
       "~/.zsh-custom": "zsh-custom/",
