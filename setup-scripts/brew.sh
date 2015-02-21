@@ -6,6 +6,7 @@ brew upgrade
 
 # Install useful binaries
 brew install curl
+brew install tmux
 brew install node
 brew install the_silver_searcher
 brew install wget
