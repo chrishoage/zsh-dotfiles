@@ -47,7 +47,7 @@ export PATH="$HOME/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export MANPATH="/usr/local/man:$MANPATH"
 
 #nvm config
-export NVM_DIR=~/.nvm
+export NVM_DIR=$HOME/.nvm
 
 source $ZSH/oh-my-zsh.sh
 
