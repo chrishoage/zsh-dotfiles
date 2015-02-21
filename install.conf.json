@@ -1,0 +1,24 @@
+[
+  {
+    "clean": ["~"]
+  },
+  {
+    "link": {
+      "~/.dotfiles": "",
+      "~/.oh-my-zsh": "oh-my-zsh/",
+       "~/.zshrc": "zshrc",
+      "~/.zsh-custom": "zsh-custom/",
+      "~/.vim": "vim/",
+      "~/.vimrc": "vimrc",
+       "~/.screenrc": "screenrc",
+       "~/.gitconfig": "gitconfig",
+       "~/.gitignore": ".gitignore"
+    }
+  },
+  {
+    "shell": [
+      ["mkdir ~/.nvm"],
+      ["git submodule update --init --recursive", "Installing submodules"]
+    ]
+  }
+]
