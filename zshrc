@@ -38,10 +38,12 @@ COMPLETION_WAITING_DOTS="true"
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
 # HIST_STAMPS="mm/dd/yyyy"
 
+APPEND_HISTORY="true"
+
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$HOME/.zsh-custom
 
-plugins=(git nvm npm rsync sublime common-aliases web-search functions aliases)
+plugins=(git nvm npm rsync sublime common-aliases history-substring-search web-search functions aliases)
 
 case `uname` in
   Darwin)
