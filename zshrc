@@ -40,10 +40,13 @@ COMPLETION_WAITING_DOTS="true"
 
 APPEND_HISTORY="true"
 
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
+
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$HOME/.zsh-custom
 
-plugins=(git nvm npm rsync sublime common-aliases history-substring-search web-search functions aliases)
+plugins=(git nvm npm rsync sublime common-aliases web-search functions aliases)
 
 case `uname` in
   Darwin)
