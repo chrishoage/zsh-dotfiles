@@ -10,6 +10,7 @@
        "~/.zshrc": "zshrc",
       "~/.zsh-custom": "zsh-custom/",
       "~/.nvm": "nvm/",
+      "~/.npmrc": "npmrc",
       "~/.vim": "vim/",
       "~/.vimrc": "vimrc",
        "~/.screenrc": "screenrc",

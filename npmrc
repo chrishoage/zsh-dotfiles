@@ -1,0 +1,3 @@
+npm set init.author.name "Chris Hoage"
+npm set init.author.email "iam@chrishoage.com"
+npm set init.author.url "http://chrishoage.com"
