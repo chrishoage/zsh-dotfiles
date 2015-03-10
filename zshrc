@@ -46,7 +46,7 @@ bindkey "^[[B" history-beginning-search-forward
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$HOME/.zsh-custom
 
-plugins=(git nvm npm rsync sublime common-aliases web-search functions aliases)
+plugins=(git nvm rvm npm rsync sublime common-aliases web-search functions aliases)
 
 case `uname` in
   Darwin)
@@ -98,3 +98,5 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 
 include $HOME/.extra
+
+#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
