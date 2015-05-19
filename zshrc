@@ -57,6 +57,8 @@ case `uname` in
     ;;
 esac
 
+plugins=($plugins zsh-syntax-highlighting)
+
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export MANPATH="/usr/local/man:$MANPATH"
 
