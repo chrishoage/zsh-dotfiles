@@ -40,6 +40,8 @@ COMPLETION_WAITING_DOTS="true"
 
 APPEND_HISTORY="true"
 
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+
 bindkey "^[[A" history-beginning-search-backward
 bindkey "^[[B" history-beginning-search-forward
 
@@ -102,3 +104,6 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 include $HOME/.extra
 
 #export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# added by travis gem
+[ -f /Users/choage5/.travis/travis.sh ] && source /Users/choage5/.travis/travis.sh
