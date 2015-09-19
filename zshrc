@@ -48,7 +48,7 @@ bindkey "^[[B" history-beginning-search-forward
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$HOME/.zsh-custom
 
-plugins=(git nvm rvm npm rsync sublime common-aliases web-search functions aliases)
+plugins=(git nvm rvm npm rsync tmux sublime common-aliases web-search functions aliases)
 
 case `uname` in
   Darwin)
@@ -64,8 +64,7 @@ plugins=($plugins zsh-syntax-highlighting)
 export PATH="$HOME/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
 export MANPATH="/usr/local/man:$MANPATH"
 
-#nvm config
-export NVM_DIR=$HOME/.nvm
+#. $NVM_DIR/nvm.sh
 
 source $ZSH/oh-my-zsh.sh
 
