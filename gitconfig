@@ -39,7 +39,7 @@
 
 [apply]
 	# Detect whitespace errors when applying a patch
-	whitespace = fix
+	whitespace = warn
 
 [core]
 	# Use custom `.gitignore` and `.gitattributes`
