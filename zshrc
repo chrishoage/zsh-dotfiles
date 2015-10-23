@@ -48,7 +48,7 @@ bindkey "^[[B" history-beginning-search-forward
 # Would you like to use another custom folder than $ZSH/custom?
 ZSH_CUSTOM=$HOME/.zsh-custom
 
-plugins=(git nvm rvm npm rsync tmux sublime common-aliases web-search functions aliases)
+plugins=(git npm rsync tmux sublime common-aliases web-search functions aliases)
 
 case `uname` in
   Darwin)
@@ -102,7 +102,4 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 include $HOME/.extra
 
-#export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
-# added by travis gem
-[ -f /Users/choage5/.travis/travis.sh ] && source /Users/choage5/.travis/travis.sh

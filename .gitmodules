@@ -1,15 +1,9 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
-[submodule "afterglow-itermcolors"]
-	path = afterglow-itermcolors
-	url = https://github.com/yabatadesign/afterglow-itermcolors/
 [submodule "oh-my-zsh"]
 	path = oh-my-zsh
 	url = https://github.com/robbyrussell/oh-my-zsh.git
-[submodule "nvm"]
-	path = nvm
-	url = https://github.com/creationix/nvm.git
 [submodule "vim/bundle/Vundle.vim"]
 	path = vim/bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
