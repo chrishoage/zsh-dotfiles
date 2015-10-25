@@ -16,9 +16,9 @@ installcask slack
 installcask textmate
 installcask mailbox
 installcask vlc
-installcask flashlight
+installcask alfred
 installcask firefox
 installcask dash
 installcask bowtie
 installcask airfoil
-
+installcask bettertouchtool
