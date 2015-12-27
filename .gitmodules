@@ -1,15 +1,6 @@
 [submodule "dotbot"]
 	path = dotbot
 	url = https://github.com/anishathalye/dotbot
-[submodule "oh-my-zsh"]
-	path = oh-my-zsh
-	url = https://github.com/robbyrussell/oh-my-zsh.git
 [submodule "vim/bundle/Vundle.vim"]
 	path = vim/bundle/Vundle.vim
 	url = https://github.com/gmarik/Vundle.vim.git
-[submodule "zsh-custom/plugins/zsh-custom/plugins"]
-	path = zsh-custom/plugins/zsh-custom/plugins
-	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
-[submodule "zsh-custom/plugins/zsh-syntax-highlighting"]
-	path = zsh-custom/plugins/zsh-syntax-highlighting
-	url = git://github.com/zsh-users/zsh-syntax-highlighting.git
