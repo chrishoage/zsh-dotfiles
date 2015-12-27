@@ -9,6 +9,7 @@
       "~/.zplug": "zplug/",
        "~/.zshrc": "zshrc",
       "~/.zsh": "zsh/",
+      "~/.tmux.conf": "tmux.conf",
       "~/.vim": "vim/",
       "~/.vimrc": "vimrc",
        "~/.screenrc": "screenrc",
