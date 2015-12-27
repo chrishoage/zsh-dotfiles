@@ -2,8 +2,6 @@ source ~/.zplug/zplug
 
 zplug "b4b4r07/zplug"
 
-zplug "themes/dstufft",  from:oh-my-zsh
-
 zplug "plugins/git",  from:oh-my-zsh, if:"which git"
 zplug "plugins/rsync",  from:oh-my-zsh
 zplug "plugins/tmux",  from:oh-my-zsh, if:"which tmux"
