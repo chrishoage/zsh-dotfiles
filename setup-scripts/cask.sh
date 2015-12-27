@@ -7,15 +7,14 @@ function installcask() {
 }
 
 installcask google-chrome
-installcask iterm2
+installcask iterm2-beta
 installcask istat-menus
 installcask dropbox
 installcask the-unarchiver
-installcask atom
+installcask sublime-text3
 installcask slack
-installcask textmate
-installcask mailbox
 installcask vlc
+installcask steam
 installcask alfred
 installcask firefox
 installcask dash

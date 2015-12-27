@@ -13,5 +13,4 @@ brew install the_silver_searcher
 brew install wget
 brew install vim
 brew install zsh
-brew install z
 
