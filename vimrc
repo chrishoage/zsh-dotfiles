@@ -55,8 +55,11 @@ Plug 'mxw/vim-jsx'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Raimondi/delimitMate'
 Plug 'bling/vim-airline'
-Plug 'yosiat/oceanic-next-vim'
+Plug 'mhartington/oceanic-next'
 call plug#end()
 
+set t_Co=256
 colorscheme OceanicNext
 set background=dark
+
+let g:airline_theme='oceanicnext'
