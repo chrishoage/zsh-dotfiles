@@ -5,7 +5,7 @@ function prompt_char {
 
 PROMPT='
 %{$fg[magenta]%}%n%{$reset_color%} at %{$fg[yellow]%}%m%{$reset_color%} in %{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}$(git_prompt_info)
-$(prompt_char) '
+%(?,%{%F{white}%},%{%F{red}%})$(prompt_char)%{$reset_color%} '
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[magenta]%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$reset_color%}"
