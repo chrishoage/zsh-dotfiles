@@ -20,12 +20,12 @@ zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-syntax-highlighting", of:zsh-syntax-highlighting.zsh, nice:19
 
 
-export DISABLE_AUTO_UPDATE="true"
-export DISABLE_AUTO_TITLE="true"
-export COMPLETION_WAITING_DOTS="true"
-export APPEND_HISTORY="true"
+DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_TITLE="true"
+COMPLETION_WAITING_DOTS="true"
+APPEND_HISTORY="true"
 
-export ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
+ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 
 # Uncomment the following line if you want to disable marking untracked files
 # under VCS as dirty. This makes repository status check for large repositories
