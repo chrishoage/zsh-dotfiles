@@ -42,8 +42,10 @@ set ignorecase
 set incsearch
 " Enable mouse in all modes
 set mouse=a
-
-
+" Tabs to spaces
+set expandtab
+" 2 spaces
+set tabstop=2
 
 call plug#begin()
 Plug 'tpope/vim-sensible'
@@ -56,6 +58,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Raimondi/delimitMate'
 Plug 'bling/vim-airline'
 Plug 'mhartington/oceanic-next'
+Plug 'evanmiller/nginx-vim-syntax'
 call plug#end()
 
 set t_Co=256
