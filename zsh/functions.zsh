@@ -26,6 +26,3 @@ function dataurl() {
   echo "data:${mimeType};base64,$(openssl base64 -in "$1" | tr -d '\n')"
 }
 
-include () {
-    [[ -f "$1" ]] && source "$1"
-}
