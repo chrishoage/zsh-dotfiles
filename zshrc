@@ -12,6 +12,7 @@ zplug "plugins/brew-cask", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "plugins/osx", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
 zplug "plugins/debian", from:oh-my-zsh, if:"[[ $OSTYPE == *linux* ]]"
 zplug "knu/z", of:z.sh, nice:10
+zplug "rimraf/k", of:k.sh
 
 zplug "~/.zsh", of:"*.zsh", from:local
 zplug "~/", of:".extra", from:local, if:"[[ -f ~/.extra ]]"
