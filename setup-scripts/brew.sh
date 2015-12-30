@@ -6,6 +6,7 @@ brew upgrade
 
 # Install useful binaries
 brew install curl
+brew install coreutils
 brew install tmux
 brew install node
 brew install ruby
