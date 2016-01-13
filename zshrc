@@ -1,7 +1,7 @@
 source ~/.zplug/zplug
 
-zplug "b4b4r07/zplug"
-
+zplug "lib/theme-and-appearance", from:oh-my-zsh
+zplug "lib/grep", from:oh-my-zsh
 zplug "plugins/git",  from:oh-my-zsh, if:"which git"
 zplug "plugins/rsync",  from:oh-my-zsh
 zplug "plugins/tmux",  from:oh-my-zsh, if:"which tmux"
@@ -15,7 +15,7 @@ zplug "knu/z", of:z.sh, nice:10
 zplug "rimraf/k", of:k.sh
 
 zplug "~/.zsh", of:"*.zsh", from:local
-zplug "~/", of:".extra", from:local, if:"[[ -f ~/.extra ]]"
+#zplug "~/", of:".extra", from:local, if:"[[ -f ~/.extra ]]"
 
 zplug "zsh-users/zsh-completions", of:zsh-completions.plugin.zsh, nice: 17
 zplug "zsh-users/zsh-syntax-highlighting", of:zsh-syntax-highlighting.zsh, nice:18
