@@ -71,3 +71,6 @@ export MANPAGER="less -X"
 
 # Link Homebrew casks in `/Applications` rather than `~/Applications`
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
