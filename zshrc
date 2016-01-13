@@ -1,23 +1,26 @@
 source ~/.zplug/zplug
 
+isOSX="[[ $OSTYPE == *darwin* ]]"
+isLinux="[[ $OSTYPE == *linux* ]]"
+
 zplug "plugins/git",  from:oh-my-zsh, if:"which git"
 zplug "plugins/rsync",  from:oh-my-zsh
 zplug "plugins/tmux",  from:oh-my-zsh, if:"which tmux"
 zplug "plugins/sublime",  from:oh-my-zsh
 zplug "plugins/common-aliases",  from:oh-my-zsh
-zplug "plugins/brew", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "plugins/brew-cask", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "plugins/osx", from:oh-my-zsh, if:"[[ $OSTYPE == *darwin* ]]"
-zplug "plugins/debian", from:oh-my-zsh, if:"[[ $OSTYPE == *linux* ]]"
+zplug "plugins/brew", from:oh-my-zsh, if:$isOSX
+zplug "plugins/brew-cask", from:oh-my-zsh, if:$isOSX
+zplug "plugins/osx", from:oh-my-zsh, if:$isOSX
+zplug "plugins/debian", from:oh-my-zsh, if:$isLinux
 zplug "knu/z", of:z.sh, nice:10
 zplug "rimraf/k", of:k.sh
 
 zplug "~/.zsh", of:"*.zsh", from:local
 zplug "~/", of:".extra", from:local, if:"[[ -f ~/.extra ]]"
 
-zplug "zsh-users/zsh-completions", of:zsh-completions.plugin.zsh, nice: 17
-zplug "zsh-users/zsh-syntax-highlighting", of:zsh-syntax-highlighting.zsh, nice:18
-zplug "zsh-users/zsh-history-substring-search", of:zsh-history-substring-search.zsh, nice:19
+zplug "zsh-users/zsh-completions", nice: 17
+zplug "zsh-users/zsh-syntax-highlighting", nice:18
+zplug "zsh-users/zsh-history-substring-search", nice:19
 
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
