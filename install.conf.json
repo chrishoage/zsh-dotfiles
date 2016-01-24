@@ -12,6 +12,7 @@
       "~/.tmux.conf": "tmux.conf",
       "~/.vim": "vim/",
       "~/.vimrc": "vimrc",
+      "~/.kwm": "kwm/",
        "~/.screenrc": "screenrc",
        "~/.gitconfig": "gitconfig",
        "~/.gitignore": ".gitignore"
