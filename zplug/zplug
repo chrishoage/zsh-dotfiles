@@ -310,7 +310,7 @@ __version_requirement() {
 }
 
 __git_version() {
-    __version_requirement "${(M)${(z)"$(git --version)"}:#[0-9]*[0-9]} " "$@"
+    __version_requirement ${(M)${(z)"$(git --version)"}:#[0-9]*[0-9]} "$@"
     return $status
 }
 
@@ -462,6 +462,29 @@ __zplug::self_update()
     fi
 }
 
+__zplug::v2()
+{
+    local -i ret=0
+
+    if [[ -d $ZPLUG_HOME ]]; then
+        command mv -f \
+            "$ZPLUG_HOME" \
+            "${ZPLUG_HOME}_v1"
+    fi
+
+    if (( $+commands[curl] )); then
+        zsh -c "$(curl -fsSL "$ZPLUG_RAWURL" 2>/dev/null)" ${1:+"-s $@"}
+        ret=$status
+
+    elif (( $+commands[wget] )); then
+        zsh -c "$(wget -qO - "$ZPLUG_RAWURL" 2>/dev/null)" ${1:+"-s $@"}
+        ret=$status
+
+    fi
+
+    return $ret
+}
+
 __zplug::update()
 {
     local line cnt=0 filter is_select=false
@@ -470,7 +493,10 @@ __zplug::update()
     case "$1" in
         --self)
             __zplug::self_update
-            shift
+            return $status
+            ;;
+        --self-v2)
+            __zplug::v2
             return $status
             ;;
         --select)
@@ -689,6 +715,14 @@ __zplug::install()
                 fi
                 continue
             }
+
+        # if tag not satisfied
+        if [[ -n $zspec[if] ]]; then
+            if ! eval "$zspec[if]" >/dev/null 2>&1; then
+                __put "$line skipped due to if condition\n"
+                continue
+            fi
+        fi
 
         # Case of oh-my-zsh
         oh_my_line=""
@@ -1004,6 +1038,9 @@ __zplug::load()
 
                     # Add files to fpath
                     load_fpaths+=(${zspec[dir]}/_*(N-.:h))
+                    if [[ -n $zspec[of] ]]; then
+                        load_fpaths+=(${zspec[dir]}/$zspec[of]/_*(N-.:h))
+                    fi
 
                     if (( $zspec[nice] > 9 )); then
                         nice_plugins+=(${glob_patterns[@]})
@@ -1066,7 +1103,7 @@ __zplug::load()
     done
     # NOTE: set fpath before compinit
     fpath=(${(u)load_fpaths} $fpath)
-    compinit -C -d "$ZPLUG_HOME/zcompdump"
+    compinit -i -d "$ZPLUG_HOME/zcompdump"
 
     for f in ${nice_plugins[@]}
     do
@@ -1104,7 +1141,7 @@ __zplug::load()
         fi
         __put '\n# fpath\n'
         __put 'fpath=(%s $fpath)\n' "${(u)load_fpaths}"
-        __put 'compinit -C -d %s\n' "$ZPLUG_HOME/zcompdump"
+        __put 'compinit -i -d %s\n' "$ZPLUG_HOME/zcompdump"
         if (( $#nice_plugins > 0 )); then
             __put '\n# Loading after compinit\n'
             __put 'source %s\n' "${(qqq)nice_plugins[@]}"
@@ -1228,6 +1265,11 @@ __zplug::check()
     do
         zspec=( ${(@f)"$(__zplug::parser "$line")"} )
         [[ $zspec[from] == "local" ]] && continue
+
+        if [[ $zspec[if] != "-EMP-" ]] && ! eval "$zspec[if]" >/dev/null 2>&1; then
+            continue
+        fi
+
         if [[ $zspec[from] != "oh-my-zsh" && ! -e $zspec[dir] ]] || [[ $zspec[from] == "oh-my-zsh" && ! -d ${zspec[dir]:h} ]]; then
             fail+=("$zspec[name]")
         fi
@@ -1593,7 +1635,7 @@ __zplug::clean()
 
     clean_deadlinks() {
         local link
-        for link in $ZPLUG_HOME/bin/*(@)
+        for link in $ZPLUG_HOME/bin/*(@N)
         do
             if [[ -L $link ]] && [[ ! -e $link ]]; then
                 command rm -f "$link"
@@ -2073,6 +2115,7 @@ __zplug::reset()
         __zplug::releases \
         __zplug::list \
         __zplug::self_update \
+        __zplug::v2 \
         __zplug::update \
         __zplug::install \
         __zplug::parser \
