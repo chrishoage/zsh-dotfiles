@@ -1,24 +1,26 @@
-source ~/.zplug/zplug
+export ZPLUG_HOME=/usr/local/opt/zplug
+source $ZPLUG_HOME/init.zsh
 
 isOSX="[[ $OSTYPE == *darwin* ]]"
 isLinux="[[ $OSTYPE == *linux* ]]"
 
-zplug "plugins/git", from:oh-my-zsh, if:"which git"
+zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh"
+zplug "plugins/git", from:oh-my-zsh, if:"which git", nice:10
 zplug "plugins/rsync", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux"
+zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", nice:10
 zplug "plugins/sublime", from:oh-my-zsh
-zplug "plugins/common-aliases", from:oh-my-zsh
+zplug "plugins/common-aliases", from:oh-my-zsh, nice:10
 zplug "plugins/brew", from:oh-my-zsh, if:$isOSX
-zplug "plugins/brew-cask", from:oh-my-zsh, if:$isOSX
-zplug "plugins/osx", from:oh-my-zsh, if:$isOSX
+zplug "plugins/brew-cask", from:oh-my-zsh, if:$isOSX, nice:10
+zplug "plugins/osx", from:oh-my-zsh, if:$isOSX, nice:10
 zplug "plugins/debian", from:oh-my-zsh, if:$isLinux
-zplug "knu/z", of:z.sh, nice:10
-zplug "rimraf/k", of:k.sh
+zplug "knu/z", use:z.sh, nice:10
+zplug "rimraf/k", use:k.sh
 
-zplug "~/.zsh", of:"*.zsh", from:local
-zplug "~/", of:".extra", from:local, if:"[[ -f ~/.extra ]]"
+zplug "~/.zsh", from:local
+zplug "~/", use:".extra", from:local, if:"[[ -f ~/.extra ]]"
 
-zplug "zsh-users/zsh-completions", nice: 17
+zplug "zsh-users/zsh-completions", nice:17
 zplug "zsh-users/zsh-syntax-highlighting", nice:18
 zplug "zsh-users/zsh-history-substring-search", nice:19
 
