@@ -1,171 +1,196 @@
-# Set default values for screen padding
-kwmc config padding top 40
-kwmc config padding bottom 65
-kwmc config padding left 20
-kwmc config padding right 20
+kwmc define ~ /Users/chrishoage
 
-# Set default values for container gaps
-kwmc config gap vertical 20
-kwmc config gap horizontal 20
+// Set default values for screen padding
+kwmc config padding 40 65 20 20
 
-kwmc config focused-border on
-kwmc config focused-border color ff6699cc
-kwmc config focused-border size 4
-kwmc config focused-border radius 8
+// Set default values for container gaps
+kwmc config gap 20 20
 
-kwmc config marked-border on
-kwmc config marked-border color ffec5f67
-kwmc config marked-border size 4
-kwmc config marked-border radius 8
+kwmc config border focused on
+kwmc config border focused color 0xFF6699CC
+kwmc config border focused size 4
+kwmc config border focused radius 8
 
-kwmc config prefix-border on
-kwmc config prefix-border color fffac863
-kwmc config prefix-border size 4
-kwmc config prefix-border radius 8
+kwmc config border marked on
+kwmc config border marked color 0xFFEC5F67
+kwmc config border marked size 4
+kwmc config border marked radius 8
 
-# Let Kwm listen for hotkeys
+kwmc mode prefix prefix on
+kwmc mode prefix timeout 0.5
+kwmc mode prefix restore default
+kwmc mode prefix color 0xFFFAC863
+
+// kwmc mode manage prefix on
+// kwmc mode manage timeout 0.75
+// kwmc mode manage restore default
+kwmc mode manage color 0xFFC594C5
+
+// Let Kwm listen for hotkeys
 kwmc config hotkeys on
 
-# Set focus-follows-mouse-mode to autoraise
-kwmc config focus autoraise
+// Set focus-follows-mouse-mode to autoraise
+kwmc config focus-follows-mouse on
 
-# Set mouse-follows-focus
-kwmc config focus mouse-follows on
+// Set mouse-follows-focus
+kwmc config mouse-follows-focus on
 
-# Disable autorise when a floating widnow is focused
-kwmc config focus standby-on-float on
+// Disable autorise when a floating widnow is focused
+kwmc config standby-on-float on
 
-# Automatically float non-resizable applicationsitutit
+// Automatically float non-resizable applicationsitutit
 kwmc config float-non-resizable on
 
-# Allow Kwm to tile windows
-kwmc config tiling on
+// Allow Kwm to tile windows
+kwmc config tiling bsp
 
-# Default tiling mode for new spaces
-kwmc config space bsp
+// Default tiling mode for new spaces
+//kwmc config space bsp
 
-# Set default tiling mode for screens
-kwmc config screen 0 bsp
-kwmc config screen 1 monocle
+// Set default tiling mode for screens
+kwmc config display 0 mode bsp
+kwmc config display 1 mode monocle
 
-# Wrap focus tos creen
-kwmc config cycle-focus screen # all | off
+// Wrap focus tos creen
+kwmc config cycle-focus on
 
-# Add custom tiling rules for applications that
-# does not get tiled by Kwm by default.
-# This is because some applications do not have the
-# AXWindowRole and AXStandardWindowSubRole
-kwmc config add-role AXDialog iTerm2
-kwmc config add-role AXDialog Zeplin
+// Add custom tiling rules for applications that
+// does not get tiled by Kwm by default.
+// This is because some applications do not have the
+// AXWindowRole and AXStandardWindowSubRole
+kwmc rule owner="iTerm2" properties={role="AXDialog"}
+kwmc rule owner="Zeplin" properties={role="AXDialog"}
 
-# The following command blacklists a specific application
-# from Kwms tiling (PS: The app name is case-sensitive)
-# If the name consist of multiple words, the command
-# looks like: kwmc config float Google Chrome
-kwmc config float Steam
-kwmc config float System Preferences
-kwmc config float Screen Sharing
-kwmc config float iStat Menus
-kwmc config float QuickTime Player
-kwmc config float zoom.us
-kwmc config float VLC
-#kwmc config float VMware Fusion
+// The following command blacklists a specific application
+// from Kwms tiling (PS: The app name is case-sensitive)
+// If the name consist of multiple words, the command
+// looks like: kwmc config float Google Chrome
+kwmc rule owner="Steam" properties={float="true"}
+kwmc rule owner="System Preferences" properties={float="true"}
+kwmc rule owner="Screen Sharing" properties={float="true"}
+kwmc rule owner="iStat Menus" properties={float="true"}
+kwmc rule owner="QuickTime Player" properties={float="true"}
+kwmc rule owner="zoom.us" properties={float="true"}
+kwmc rule owner="VLC" properties={float="true"}
 
-kwmc config capture 1 Slack
-kwmc config capture 1 iTunes
-kwmc config capture 1 Messages
 
-kwmc config prefix ctrl-k
-kwmc config prefix-global off
-kwmc config prefix-timeout 0.75
+kwmc rule owner="Slack"    properties={display="1"}
+kwmc rule owner="iTunes"   properties={display="1"}
+kwmc rule owner="Messages" properties={display="1"}
 
-# Toggle autoraise
-kwmc bind prefix+cmd-t config focus toggle
+kwmc bindsym ctrl-k mode activate prefix
+kwmc bindsym prefix-m mode activate manage
+kwmc bindcode manage-0x35 mode activate default
 
-# Refresh window position
-# kwmc bind shift+alt+ctrl-r window -c refresh
+// Toggle autoraise
+kwmc bindsym prefix+shift-t tree -c bsp
 
-# Refresh all windows
-kwmc bind prefix+cmd+shift-r tree -c refresh
+kwmc bindsym prefix-t tree -c monocle
 
-#Quit kwm
-kwmc bind prefix+cmd-q quit
+// Refresh window position
+// kwmc bindsym shift+alt+ctrl-r window -c refresh
 
-# Mark window for next split
-kwmc bind prefix-m mark -w focused
+// Refresh all windows
+kwmc bindsym prefix+cmd+shift-r tree -c refresh
 
-# Toggle horizontal and vertical split for window
-kwmc bind prefix-\ window -c split
+// Quit kwm
+kwmc bindsym prefix+cmd-q quit
 
-# Toggle window fill screen
-kwmc bind prefix-f window -t fullscreen
+// Mark focused window
+kwmc bindsym ctrl+shift-m window -mk focused
 
-# Toggle window fill parent container
-kwmc bind prefix-p window -t parent
+// Toggle horizontal and vertical split for window
+kwmc bindsym prefix-\ window -c split-mode toggle
 
-# Toggle window float
-kwmc bind prefix-w window -t float
+// Toggle window fill screen
+kwmc bindsym prefix-f window -z fullscreen
 
-# Move marked window to new leaf at focused window
-kwmc bind prefix-x window -x mark
+// Toggle window fill parent container
+kwmc bindsym prefix-p window -z parent
 
-# Move focused window to screen
-kwmc bind prefix+cmd-1 screen -m 0
-kwmc bind prefix+cmd-2 screen -m 1
+// Toggle window float
+kwmc bindsym prefix-w window -t focused
 
-# Change space to Binary Space Partitioning (default)
-kwmc bind prefix+cmd-b space -t bsp
+// Move marked window to new leaf at focused window
+kwmc bindsym prefix-x window -m mark
 
-# Change space to monocle (full screen windows)
-kwmc bind prefix+cmd-f space -t monocle
+// Move focused window to screen
+kwmc bindsym prefix+cmd-1 window -m display 0
+kwmc bindsym prefix+cmd-2 window -m display 1
 
-# Change space to floating windows (normal)
-kwmc bind prefix+cmd-w space -t float
+// Change space to Binary Space Partitioning (default)
+kwmc bindsym prefix+cmd-b space -t bsp
 
-# Rotate tree clockwise?
-kwmc bind prefix+cmd-r tree -r 90
+// Change space to monocle (full screen windows)
+kwmc bindsym prefix+cmd-f space -t monocle
 
-# Move Focus
-kwmc bind cmd+alt-h window -f west
-kwmc bind cmd+alt-j window -f south
-kwmc bind cmd+alt-k window -f north
-kwmc bind cmd+alt-l window -f east
+// Change space to floating windows (normal)
+kwmc bindsym prefix+cmd-w space -t float
 
-# Move Screen Focus
-kwmc bind cmd+alt-p screen -f prev
-kwmc bind cmd+alt-n screen -f next
+// Rotate tree clockwise?
+kwmc bindsym prefix+cmd-r tree -r 90
 
-# Move Window
-kwmc bind ctrl+shift-h window -s west
-kwmc bind ctrl+shift-j window -s south
-kwmc bind ctrl+shift-k window -s north
-kwmc bind ctrl+shift-l window -s east
+// Mark Window
+kwmc bindsym prefix-s window -s mark
 
-kwmc bind prefix-s window -s mark
+// Move Focus
+kwmc bindsym cmd+alt-h window -f west
+kwmc bindsym cmd+alt-j window -f south
+kwmc bindsym cmd+alt-k window -f north
+kwmc bindsym cmd+alt-l window -f east
 
-# Change pane size
-kwmc bind prefix-h window -c reduce 0.05
-kwmc bind prefix-l window -c expand 0.05
-kwmc bind prefix+shift-h window -c reduce 0.1
-kwmc bind prefix+shift-l window -c expand 0.1
+kwmc bindsym manage-h window -f west
+kwmc bindsym manage-j window -f south
+kwmc bindsym manage-k window -f north
+kwmc bindsym manage-l window -f east
 
-# Change Gaps
-kwmc bind prefix-x space -g increase horizontal
-kwmc bind prefix-y space -g increase vertical
+// Cycle monocle node focus
+kwmc bindsym cmd+shift-h window -fm prev
+kwmc bindsym cmd+shift-l window -fm next
 
-kwmc bind prefix+shift-x space -g decrease horizontal
-kwmc bind prefix+shift-y space -g decrease vertical
+// Move Screen Focus
+kwmc bindsym cmd+alt-p display -f prev
+kwmc bindsym cmd+alt-n display -f next
 
-kwmc bind prefix-left space -p increase left
-kwmc bind prefix-right space -p increase right
-kwmc bind prefix-up space -p increase top
-kwmc bind prefix-down space -p increase bottom
+// Move Window
+kwmc bindsym manage+cmd+alt-h window -s west
+kwmc bindsym manage+cmd+alt-j window -s south
+kwmc bindsym manage+cmd+alt-k window -s north
+kwmc bindsym manage+cmd+alt-l window -s east
 
-kwmc bind prefix+shift-left space -p decrease left
-kwmc bind prefix+shift-right space -p decrease right
-kwmc bind prefix+shift-up space -p decrease top
-kwmc bind prefix+shift-down space -p decrease bottom
+kwmc bindsym manage+ctrl+shift-h window -m west
+kwmc bindsym manage+ctrl+shift-j window -m south
+kwmc bindsym manage+ctrl+shift-k window -m north
+kwmc bindsym manage+ctrl+shift-l window -m east
 
-# Open iTerm2 window
-kwmc bind prefix-return sys ~/bin/open-iTerm.applescript
-kwmc bind prefix-c tree restore code
+// Change pane size
+kwmc bindsym manage+cmd-h window -c reduce 0.05
+kwmc bindsym manage+cmd-l window -c expand 0.05
+kwmc bindsym manage+cmd+shift-h window -c reduce 0.1
+kwmc bindsym manage+cmd+shift-l window -c expand 0.1
+
+// Increase Gaps Size
+kwmc bindsym manage-x space -g increase horizontal
+kwmc bindsym manage-y space -g increase vertical
+
+// Decrease Gaps Size
+kwmc bindsym manage+shift-x space -g decrease horizontal
+kwmc bindsym manage+shift-y space -g decrease vertical
+
+// Increase padding
+kwmc bindsym manage-left space -p increase left
+kwmc bindsym manage-right space -p increase right
+kwmc bindsym manage-up space -p increase top
+kwmc bindsym manage-down space -p increase bottom
+
+// Decrease padding
+kwmc bindsym manage+shift-left space -p decrease left
+kwmc bindsym manage+shift-right space -p decrease right
+kwmc bindsym manage+shift-up space -p decrease top
+kwmc bindsym manage+shift-down space -p decrease bottom
+
+// Open iTerm2 window
+kwmc bindsym prefix-return exec ~/bin/open-iTerm.applescript
+
+// Restore BSP Tree
+kwmc bindsym prefix-c tree restore code
