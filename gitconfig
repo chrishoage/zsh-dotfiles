@@ -38,6 +38,10 @@
 	fm = "!f() { git log --pretty=format:'%C(yellow)%h  %Cblue%ad  %Creset%s%Cgreen  [%cn] %Cred%d' --decorate --date=short --grep=$1; }; f"
 	# Remove branches that have already been merged with master
 	dm = "!git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"
+	# Open conflicted files in sublime text
+	edit-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; st `f`"
+	# Add all conflicted files
+	add-unmerged = "!f() { git ls-files --unmerged | cut -f2 | sort -u ; }; git add `f`"
 
 [apply]
 	# Detect whitespace errors when applying a patch
@@ -95,3 +99,5 @@
 [push]
 	default = simple
 
+[pull]
+	rebase = true
