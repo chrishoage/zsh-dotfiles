@@ -1,3 +1,17 @@
+call plug#begin()
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-gitgutter'
+Plug 'jelera/vim-javascript-syntax'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'Raimondi/delimitMate'
+Plug 'bling/vim-airline'
+Plug 'mhartington/oceanic-next'
+Plug 'evanmiller/nginx-vim-syntax'
+call plug#end()
+
 " Make Vim more useful
 set nocompatible
 " Use the OS clipboard by default (on versions compiled with `+clipboard`)
@@ -46,20 +60,6 @@ set mouse=a
 set expandtab
 " 2 spaces
 set tabstop=2
-
-call plug#begin()
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-fugitive'
-Plug 'vim-gitgutter'
-Plug 'jelera/vim-javascript-syntax'
-Plug 'pangloss/vim-javascript'
-Plug 'mxw/vim-jsx'
-Plug 'nathanaelkane/vim-indent-guides'
-Plug 'Raimondi/delimitMate'
-Plug 'bling/vim-airline'
-Plug 'mhartington/oceanic-next'
-Plug 'evanmiller/nginx-vim-syntax'
-call plug#end()
 
 set t_Co=256
 colorscheme OceanicNext
