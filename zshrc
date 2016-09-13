@@ -40,7 +40,7 @@ export PATH="$HOME/bin:$PATH"
 export MANPATH="/usr/local/man:$MANPATH"
 
 # Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
+if ! zplug check; then
     printf "Install? [y/N]: "
     if read -q; then
         echo; zplug install
