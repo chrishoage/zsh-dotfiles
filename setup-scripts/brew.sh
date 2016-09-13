@@ -5,7 +5,6 @@ brew update
 brew upgrade
 
 # Install useful binaries
-brew install zplug
 brew install curl
 brew install coreutils
 brew install tmux
