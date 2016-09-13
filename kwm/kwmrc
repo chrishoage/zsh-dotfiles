@@ -51,6 +51,9 @@ kwmc config tiling bsp
 kwmc config display 0 mode bsp
 kwmc config display 1 mode monocle
 
+// Set main display and space to code layout
+kwmc config space 0 1 tree code
+
 // Wrap focus tos creen
 kwmc config cycle-focus on
 
@@ -61,10 +64,7 @@ kwmc config cycle-focus on
 kwmc rule owner="iTerm2" properties={role="AXDialog"}
 kwmc rule owner="Zeplin" properties={role="AXDialog"}
 
-// The following command blacklists a specific application
-// from Kwms tiling (PS: The app name is case-sensitive)
-// If the name consist of multiple words, the command
-// looks like: kwmc config float Google Chrome
+// kwm layout rules for apps
 kwmc rule owner="Steam" properties={float="true"}
 kwmc rule owner="System Preferences" properties={float="true"}
 kwmc rule owner="Screen Sharing" properties={float="true"}
@@ -164,10 +164,19 @@ kwmc bindsym manage+ctrl+shift-k window -m north
 kwmc bindsym manage+ctrl+shift-l window -m east
 
 // Change pane size
-kwmc bindsym manage+cmd-h window -c reduce 0.05
-kwmc bindsym manage+cmd-l window -c expand 0.05
-kwmc bindsym manage+cmd+shift-h window -c reduce 0.1
-kwmc bindsym manage+cmd+shift-l window -c expand 0.1
+// kwmc bindsym manage+cmd-h window -c reduce 0.025
+// kwmc bindsym manage+cmd-l window -c expand 0.025
+// kwmc bindsym manage+cmd+shift-h window -c reduce 0.1
+// kwmc bindsym manage+cmd+shift-l window -c expand 0.1
+kwmc bindsym manage+cmd-h window -c expand 0.025 west
+kwmc bindsym manage+cmd-j window -c expand 0.025 south
+kwmc bindsym manage+cmd-k window -c expand 0.025 north
+kwmc bindsym manage+cmd-l window -c expand 0.025 east
+
+kwmc bindsym manage+cmd+shift-h window -c reduce 0.025 west
+kwmc bindsym manage+cmd+shift-j window -c reduce 0.025 south
+kwmc bindsym manage+cmd+shift-k window -c reduce 0.025 north
+kwmc bindsym manage+cmd+shift-l window -c reduce 0.025 east
 
 // Increase Gaps Size
 kwmc bindsym manage-x space -g increase horizontal
