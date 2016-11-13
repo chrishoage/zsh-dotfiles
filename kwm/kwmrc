@@ -1,30 +1,18 @@
-kwmc define ~ /Users/chrishoage
-
 // Set default values for screen padding
-kwmc config padding 40 65 20 20
+kwmc config padding 40 75 20 20
 
 // Set default values for container gaps
 kwmc config gap 20 20
-
-kwmc config border focused on
-kwmc config border focused color 0xFF6699CC
-kwmc config border focused size 4
-kwmc config border focused radius 8
 
 kwmc config border marked on
 kwmc config border marked color 0xFFEC5F67
 kwmc config border marked size 4
 kwmc config border marked radius 8
 
-kwmc mode prefix prefix on
-kwmc mode prefix timeout 0.5
-kwmc mode prefix restore default
-kwmc mode prefix color 0xFFFAC863
-
-// kwmc mode manage prefix on
-// kwmc mode manage timeout 0.75
-// kwmc mode manage restore default
-kwmc mode manage color 0xFFC594C5
+kwmc config border focused on
+kwmc config border focused color 0xFF6699CC
+kwmc config border focused size 4
+kwmc config border focused radius 8
 
 // Let Kwm listen for hotkeys
 kwmc config hotkeys on
@@ -77,129 +65,3 @@ kwmc rule owner="VLC" properties={float="true"}
 kwmc rule owner="Slack"    properties={display="1"}
 kwmc rule owner="iTunes"   properties={display="1"}
 kwmc rule owner="Messages" properties={display="1"}
-
-kwmc bindsym ctrl-k mode activate prefix
-kwmc bindsym prefix-m mode activate manage
-kwmc bindcode manage-0x35 mode activate default
-
-// Toggle autoraise
-kwmc bindsym prefix+shift-t tree -c bsp
-
-kwmc bindsym prefix-t tree -c monocle
-
-// Refresh window position
-// kwmc bindsym shift+alt+ctrl-r window -c refresh
-
-// Refresh all windows
-kwmc bindsym prefix+cmd+shift-r tree -c refresh
-
-// Quit kwm
-kwmc bindsym prefix+cmd-q quit
-
-// Mark focused window
-kwmc bindsym ctrl+shift-m window -mk focused
-
-// Toggle horizontal and vertical split for window
-kwmc bindsym prefix-\ window -c split-mode toggle
-
-// Toggle window fill screen
-kwmc bindsym prefix-f window -z fullscreen
-
-// Toggle window fill parent container
-kwmc bindsym prefix-p window -z parent
-
-// Toggle window float
-kwmc bindsym prefix-w window -t focused
-
-// Move marked window to new leaf at focused window
-kwmc bindsym prefix-x window -m mark
-
-// Move focused window to screen
-kwmc bindsym prefix+cmd-1 window -m display 0
-kwmc bindsym prefix+cmd-2 window -m display 1
-
-// Change space to Binary Space Partitioning (default)
-kwmc bindsym prefix+cmd-b space -t bsp
-
-// Change space to monocle (full screen windows)
-kwmc bindsym prefix+cmd-f space -t monocle
-
-// Change space to floating windows (normal)
-kwmc bindsym prefix+cmd-w space -t float
-
-// Rotate tree clockwise?
-kwmc bindsym prefix+cmd-r tree -r 90
-
-// Mark Window
-kwmc bindsym prefix-s window -s mark
-
-// Move Focus
-kwmc bindsym cmd+alt-h window -f west
-kwmc bindsym cmd+alt-j window -f south
-kwmc bindsym cmd+alt-k window -f north
-kwmc bindsym cmd+alt-l window -f east
-
-kwmc bindsym manage-h window -f west
-kwmc bindsym manage-j window -f south
-kwmc bindsym manage-k window -f north
-kwmc bindsym manage-l window -f east
-
-// Cycle monocle node focus
-kwmc bindsym cmd+shift-h window -fm prev
-kwmc bindsym cmd+shift-l window -fm next
-
-// Move Screen Focus
-kwmc bindsym cmd+alt-p display -f prev
-kwmc bindsym cmd+alt-n display -f next
-
-// Move Window
-kwmc bindsym manage+cmd+alt-h window -s west
-kwmc bindsym manage+cmd+alt-j window -s south
-kwmc bindsym manage+cmd+alt-k window -s north
-kwmc bindsym manage+cmd+alt-l window -s east
-
-kwmc bindsym manage+ctrl+shift-h window -m west
-kwmc bindsym manage+ctrl+shift-j window -m south
-kwmc bindsym manage+ctrl+shift-k window -m north
-kwmc bindsym manage+ctrl+shift-l window -m east
-
-// Change pane size
-// kwmc bindsym manage+cmd-h window -c reduce 0.025
-// kwmc bindsym manage+cmd-l window -c expand 0.025
-// kwmc bindsym manage+cmd+shift-h window -c reduce 0.1
-// kwmc bindsym manage+cmd+shift-l window -c expand 0.1
-kwmc bindsym manage+cmd-h window -c expand 0.025 west
-kwmc bindsym manage+cmd-j window -c expand 0.025 south
-kwmc bindsym manage+cmd-k window -c expand 0.025 north
-kwmc bindsym manage+cmd-l window -c expand 0.025 east
-
-kwmc bindsym manage+cmd+shift-h window -c reduce 0.025 west
-kwmc bindsym manage+cmd+shift-j window -c reduce 0.025 south
-kwmc bindsym manage+cmd+shift-k window -c reduce 0.025 north
-kwmc bindsym manage+cmd+shift-l window -c reduce 0.025 east
-
-// Increase Gaps Size
-kwmc bindsym manage-x space -g increase horizontal
-kwmc bindsym manage-y space -g increase vertical
-
-// Decrease Gaps Size
-kwmc bindsym manage+shift-x space -g decrease horizontal
-kwmc bindsym manage+shift-y space -g decrease vertical
-
-// Increase padding
-kwmc bindsym manage-left space -p increase left
-kwmc bindsym manage-right space -p increase right
-kwmc bindsym manage-up space -p increase top
-kwmc bindsym manage-down space -p increase bottom
-
-// Decrease padding
-kwmc bindsym manage+shift-left space -p decrease left
-kwmc bindsym manage+shift-right space -p decrease right
-kwmc bindsym manage+shift-up space -p decrease top
-kwmc bindsym manage+shift-down space -p decrease bottom
-
-// Open iTerm2 window
-kwmc bindsym prefix-return exec ~/bin/open-iTerm.applescript
-
-// Restore BSP Tree
-kwmc bindsym prefix-c tree restore code

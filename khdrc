@@ -1,0 +1,164 @@
+# sample config for khd
+
+# NOTE(koekeishiya): A bind is written in the form:
+#                   <keysym> [!] [<app list>] [->] : <command>
+#                   where
+#                       <keysym>   = mode + mod + ... + mod - literal
+#                       <keysym>   = mode + mod + ... + mod - keycode (must have 0x prefix)
+#                       <keysym>   = mode + mod + ... + mod (modifier only binding)
+#
+#                       [<app,
+#                         app,     = optional list '[app1, ..., appN]' of applications
+#                         app>]      that this bind will be activated for. if the
+#                                    focused application is not contained in this list,
+#                                    the associated command will not be triggered, and
+#                                    the keypress will be passed through as normal.
+#
+#                       [!]        = optional operator '!' negates the behaviour when a
+#                                    list of applications is given. this marks the bind
+#                                    as 'Hotkey_Exclude', causing the bind to not work
+#                                    when the focused application is in the given list.
+#
+#                       [->]       = optional operator '->' that marks this bind as
+#                                    'passthrough'. this causes the key to be passed
+#                                    through to the system, instead of being consumed.
+#
+#                       <command>  = command is executed through '$SHELL -c' and
+#                                    follows valid shell syntax. if the $SHELL environment
+#                                    variable is not set, it will default to '/bin/bash'.
+#                                    when bash is used, the ';' delimeter can be specified
+#                                    to chain commands.
+#
+#                                    to allow a command to extend into multiple lines,
+#                                    prepend '\' at the end of the previous line.
+#
+#                                    an EOL character signifies the end of the bind.
+
+# NOTE(koekeishiya) Example of passthrough
+# cmd - m -> : echo "alert and minimize window" | alerter -title Test passthrough -timeout 2
+
+# NOTE(koekeishiya) Example of app list
+# alt - e [
+#           iTerm2,
+#           Terminal,
+#           HyperTerm
+#         ]
+#         : echo "so this is how deep the rabbit hole goes.." |\
+#           alerter -title Test passthrough -timeout 2
+
+# NOTE(koekeishiya) Example of negated app list
+# alt - e [
+#           iTerm2,
+#           Terminal,
+#           HyperTerm
+#         ] !
+#         : echo "blue pill, i choose you!" |\
+#           alerter -title Test passthrough -timeout 2
+
+# NOTE(koekeishiya) Modifier only binding
+# left shift    -> (    right shift   -> )
+# left cmd      -> {    right cmd     -> }
+
+# khd mod_trigger_timeout 0.1
+# lshift : khd -p "shift - 8"
+# rshift : khd -p "shift - 9"
+# lcmd   : khd -p "shift + alt - 8"
+# rcmd   : khd -p "shift + alt - 9"
+
+# TODO(koekeishiya): possibly allow combined syntax such as
+# [switcher,ytd] + ctrl - f : khd -e "mode activate default"
+
+# enable kwm compatibility mode
+khd kwm on
+
+# set border color for different modes
+khd mode default color 0xFF6699CC
+khd mode prefix prefix on
+khd mode prefix timeout 0.5
+khd mode prefix color 0xFFFAC863
+khd mode manage color 0xFFC594C5
+
+ctrl - k                  : khd -e "mode activate prefix"
+prefix - m                : khd -e "mode activate manage"
+manage - 0x35             : khd -e "mode activate default"
+
+# prefix
+
+prefix + cmd + shift - r  : kwmc tree -c refresh
+prefix + cmd - q          : kwmc quit
+prefix - 0x2A                : kwmc window -c split-mode toggle
+
+prefix - f                : kwmc window -z fullscreen
+prefix - p                : kwmc window -z parent
+prefix - w                : kwmc window -t focused
+prefix - x                : kwmc window -m mark
+
+prefix + cmd - 1          : kwmc window -m display 0
+prefix + cmd - 2          : kwmc window -m display 1
+
+prefix + cmd - b          : kwmc space -t bsp
+prefix + cmd - f          : kwmc space -t monocle
+prefix + cmd - w          : kwmc space -t float
+
+prefix + cmd - r          : kwmc tree -r 90
+
+prefix - s                : kwmc window -s mark
+
+prefix - return           : exec ~/bin/open-iTerm.applescript
+prefix - c                : kwmc tree restore code
+
+# manage
+
+manage - h                : kwmc window -f west
+manage - j                : kwmc window -f south
+manage - k                : kwmc window -f north
+manage - l                : kwmc window -f east
+
+manage + cmd + alt - h    : kwmc window -s west
+manage + cmd + alt - j    : kwmc window -s south
+manage + cmd + alt - k    : kwmc window -s north
+manage + cmd + alt - l    : kwmc window -s east
+
+manage + ctrl + shift - h : kwmc window -m west
+manage + ctrl + shift - j : kwmc window -m south
+manage + ctrl + shift - k : kwmc window -m north
+manage + ctrl + shift - l : kwmc window -m east
+
+manage + cmd - h          : kwmc window -c expand 0.025 west
+manage + cmd - j          : kwmc window -c expand 0.025 south
+manage + cmd - k          : kwmc window -c expand 0.025 north
+manage + cmd - l          : kwmc window -c expand 0.025 east
+
+manage + cmd + shift - h  : kwmc window -c reduce 0.025 west
+manage + cmd + shift - j  : kwmc window -c reduce 0.025 south
+manage + cmd + shift - k  : kwmc window -c reduce 0.025 north
+manage + cmd + shift - l  : kwmc window -c reduce 0.025 east
+
+manage - x                : kwmc space -g increase horizontal
+manage - y                : kwmc space -g increase vertical
+manage + shift - x        : kwmc space -g decrease horizontal
+manage + shift - y        : kwmc space -g decrease vertical
+
+manage - left             : kwmc space -p increase left
+manage - right            : kwmc space -p increase right
+manage - up               : kwmc space -p increase top
+manage - down             : kwmc space -p increase bottom
+manage + shift - left     : kwmc space -p decrease left
+manage + shift - right    : kwmc space -p decrease right
+manage + shift - up       : kwmc space -p decrease top
+manage + shift - down     : kwmc space -p decrease bottom
+
+# default
+
+ctrl + shift - m          : kwmc window -mk focused
+
+cmd + alt - h             : kwmc window -f west
+cmd + alt - j             : kwmc window -f south
+cmd + alt - k             : kwmc window -f north
+cmd + alt - l             : kwmc window -f east
+
+cmd + shift - h           : kwmc window -fm prev
+cmd + shift - l           : kwmc window -fm next
+
+cmd + alt - p             : kwmc display -f prev
+cmd + alt - n             : kwmc display -f next
