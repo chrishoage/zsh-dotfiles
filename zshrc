@@ -11,7 +11,6 @@ zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", nice:10
 zplug "plugins/sublime", from:oh-my-zsh
 zplug "plugins/common-aliases", from:oh-my-zsh, nice:10
 zplug "plugins/brew", from:oh-my-zsh, if:$isOSX
-zplug "plugins/brew-cask", from:oh-my-zsh, if:$isOSX, nice:10
 zplug "plugins/osx", from:oh-my-zsh, if:$isOSX, nice:10
 zplug "plugins/debian", from:oh-my-zsh, if:$isLinux
 zplug "knu/z", use:z.sh, nice:10
