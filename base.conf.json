@@ -1,6 +1,9 @@
 [
   {
-    "clean": ["~"]
+    "clean": [
+      "~",
+      "~/.*"
+    ]
   },
   {
     "link": {
@@ -12,8 +15,6 @@
       "~/.tmux.conf": "tmux.conf",
       "~/.vim": "vim/",
       "~/.vimrc": "vimrc",
-      "~/.kwm": "kwm/",
-      "~/.khdrc": "khdrc",
        "~/.screenrc": "screenrc",
        "~/.gitconfig": "gitconfig",
        "~/.gitignore": ".gitignore"
