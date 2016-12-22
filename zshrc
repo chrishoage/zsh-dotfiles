@@ -9,6 +9,7 @@ zplug "plugins/git", from:oh-my-zsh, if:"which git", nice:10
 zplug "plugins/rsync", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", nice:10
 zplug "plugins/sublime", from:oh-my-zsh
+zplug "plugins/yarn", from:oh-my-zsh, nice:10
 zplug "plugins/common-aliases", from:oh-my-zsh, nice:10
 zplug "plugins/brew", from:oh-my-zsh, if:$isOSX
 zplug "plugins/osx", from:oh-my-zsh, if:$isOSX, nice:10
