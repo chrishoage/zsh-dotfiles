@@ -1,5 +1,3 @@
-# sample config for khd
-
 # NOTE(koekeishiya): A bind is written in the form:
 #                   <keysym> [!] [<app list>] [->] : <command>
 #                   where
@@ -96,6 +94,9 @@ prefix - x                : kwmc window -m mark
 prefix + cmd - 1          : kwmc window -m display 0
 prefix + cmd - 2          : kwmc window -m display 1
 
+prefix + shift - 1          : kwmc window -m space 1
+prefix + shift - 2          : kwmc window -m space 2
+
 prefix + cmd - b          : kwmc space -t bsp
 prefix + cmd - f          : kwmc space -t monocle
 prefix + cmd - w          : kwmc space -t float
@@ -162,3 +163,6 @@ cmd + shift - l           : kwmc window -fm next
 
 cmd + alt - p             : kwmc display -f prev
 cmd + alt - n             : kwmc display -f next
+
+cmd + alt - 0x21          : kwmc space -fExperimental left
+cmd + alt - 0x1E          : kwmc space -fExperimental right

@@ -60,7 +60,7 @@ kwmc rule owner="iStat Menus" properties={float="true"}
 kwmc rule owner="QuickTime Player" properties={float="true"}
 kwmc rule owner="zoom.us" properties={float="true"}
 kwmc rule owner="VLC" properties={float="true"}
-
+kwmc rule owner="Airfoil" properties={float="true"; role="AXDialog"}
 
 kwmc rule owner="Slack"    properties={display="1"}
 kwmc rule owner="iTunes"   properties={display="1"}
