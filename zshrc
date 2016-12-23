@@ -24,6 +24,8 @@ zplug "zsh-users/zsh-completions", nice:17
 zplug "zsh-users/zsh-syntax-highlighting", nice:18
 zplug "zsh-users/zsh-history-substring-search", nice:19
 
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
+
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
 COMPLETION_WAITING_DOTS="true"
