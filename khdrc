@@ -84,85 +84,110 @@ manage - 0x35             : khd -e "mode activate default"
 
 prefix + cmd + shift - r  : kwmc tree -c refresh
 prefix + cmd - q          : kwmc quit
-prefix - 0x2A                : kwmc window -c split-mode toggle
+prefix - 0x2A             : kwmc window -c split-mode toggle
 
-prefix - f                : kwmc window -z fullscreen
+# Toggle window state
+prefix + shift - f        : kwmc window -z fullscreen
 prefix - p                : kwmc window -z parent
 prefix - w                : kwmc window -t focused
+
+# Swap marked window with focused window
 prefix - x                : kwmc window -m mark
 
+# Move focused window to display
 prefix + cmd - 1          : kwmc window -m display 0
 prefix + cmd - 2          : kwmc window -m display 1
 
-prefix + shift - 1          : kwmc window -m space 1
-prefix + shift - 2          : kwmc window -m space 2
+# Move focused window to space
+prefix + shift - 1        : kwmc window -m space 1
+prefix + shift - 2        : kwmc window -m space 2
+prefix + shift - 3        : kwmc window -m space 3
 
-prefix + cmd - b          : kwmc space -t bsp
-prefix + cmd - f          : kwmc space -t monocle
-prefix + cmd - w          : kwmc space -t float
+# Set space tiling mode
+prefix + b                : kwmc space -t bsp
+prefix + f                : kwmc space -t monocle
+prefix + w                : kwmc space -t float
 
+# Rotate tree 90 clockwise
 prefix + cmd - r          : kwmc tree -r 90
 
+# Swap window with marked window
 prefix - s                : kwmc window -s mark
 
-prefix - return           : exec ~/bin/open-iTerm.applescript
+# Restore code layout
 prefix - c                : kwmc tree restore code
 
-# manage
-
-manage - h                : kwmc window -f west
-manage - j                : kwmc window -f south
-manage - k                : kwmc window -f north
-manage - l                : kwmc window -f east
-
-manage + cmd + alt - h    : kwmc window -s west
-manage + cmd + alt - j    : kwmc window -s south
-manage + cmd + alt - k    : kwmc window -s north
-manage + cmd + alt - l    : kwmc window -s east
-
-manage + ctrl + shift - h : kwmc window -m west
-manage + ctrl + shift - j : kwmc window -m south
-manage + ctrl + shift - k : kwmc window -m north
-manage + ctrl + shift - l : kwmc window -m east
-
+# Expand focused window in direction
 manage + cmd - h          : kwmc window -c expand 0.025 west
 manage + cmd - j          : kwmc window -c expand 0.025 south
 manage + cmd - k          : kwmc window -c expand 0.025 north
 manage + cmd - l          : kwmc window -c expand 0.025 east
 
+# Reduce focused window in direction
 manage + cmd + shift - h  : kwmc window -c reduce 0.025 west
 manage + cmd + shift - j  : kwmc window -c reduce 0.025 south
 manage + cmd + shift - k  : kwmc window -c reduce 0.025 north
 manage + cmd + shift - l  : kwmc window -c reduce 0.025 east
 
+# Increase Container Gaps
 manage - x                : kwmc space -g increase horizontal
 manage - y                : kwmc space -g increase vertical
+
+# Decrease Container Gaps
 manage + shift - x        : kwmc space -g decrease horizontal
 manage + shift - y        : kwmc space -g decrease vertical
 
+# Increase Screen Padding
 manage - left             : kwmc space -p increase left
 manage - right            : kwmc space -p increase right
 manage - up               : kwmc space -p increase top
 manage - down             : kwmc space -p increase bottom
+manage - p                : kwmc space -p increase all
+
+# Decrease Screen Padding
 manage + shift - left     : kwmc space -p decrease left
 manage + shift - right    : kwmc space -p decrease right
 manage + shift - up       : kwmc space -p decrease top
 manage + shift - down     : kwmc space -p decrease bottom
+manage + shift - p        : kwmc space -p decrease all
 
-# default
+# Global keybinds
 
+# Open new iTerm window
+cmd - return           : exec ~/bin/open-iTerm.applescript
+
+# Mark focused window for next insertion point
 ctrl + shift - m          : kwmc window -mk focused
 
+# Focus window in direction
 cmd + alt - h             : kwmc window -f west
 cmd + alt - j             : kwmc window -f south
 cmd + alt - k             : kwmc window -f north
 cmd + alt - l             : kwmc window -f east
 
-cmd + shift - h           : kwmc window -fm prev
-cmd + shift - l           : kwmc window -fm next
+cmd + alt - c             : kwmc window -f next
+cmd + alt + shift - c     : kwmc window -f prev
 
+# Swap Focused Window
+ctrl + alt - h           :    kwmc window -s west
+ctrl + alt - j           :    kwmc window -s south
+ctrl + alt - k           :    kwmc window -s north
+ctrl + alt - l           :    kwmc window -s east
+ctrl + alt - m           :    kwmc window -s mark
+
+# Detach Focused Window And Reinsert In Direction
+ctrl + shift - k          :    kwmc window -m north
+ctrl + shift - l          :    kwmc window -m east
+ctrl + shift - j          :    kwmc window -m south
+ctrl + shift - h          :    kwmc window -m west
+
+# Detach Marked Window And Reinsert At Focused Window
+ctrl + shift - x         :    kwmc window -m mark
+
+# Cycle focus though displays
 cmd + alt - p             : kwmc display -f prev
 cmd + alt - n             : kwmc display -f next
 
+# Cycle focus though spaces
 cmd + alt - 0x21          : kwmc space -fExperimental left
 cmd + alt - 0x1E          : kwmc space -fExperimental right

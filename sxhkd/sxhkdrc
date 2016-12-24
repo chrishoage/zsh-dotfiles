@@ -26,13 +26,13 @@ shift + alt + Escape
 alt + {_,shift + }w
 	bspc node -{c,k}
 
-# alternate between the tiled and monocle layout
-alt + m
-	bspc desktop -l next
+# set tiled layout
+ctrl + k; b
+	bspc desktop -l tiled
 
-# if the current node is automatic, send it to the last manual, otherwise pull the last leaf
-alt + y
-	bspc query -N -n focused.automatic && bspc node -n last.!automatic || bspc node last.leaf -n focused
+# set monocle layout
+ctrl + k; f
+	bspc desktop -l monocle
 
 # swap the current node and the biggest node
 alt + g
@@ -43,14 +43,15 @@ alt + g
 #
 
 # set the window state
-alt + f; {t,shift + t,w,f}
+ctrl + k; {t,shift + t,w,shift + f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
 
 # set the node flags
-alt + f; {l,s,p}
+ctrl + k; {l,s,p}
 	bspc node -g {locked,sticky,private}
 
-alt + f; {a, shift + a}
+# change automatic mode to be more like kwm
+ctrl + k; {a, shift + a}
   bspc config external_rules_command {no, ~/.config/bspwm/pseudo_automatic_mode}
 
 #
@@ -58,16 +59,25 @@ alt + f; {a, shift + a}
 #
 
 # focus the node in the given direction
-alt + {_,shift +,ctrl + }{h,j,k,l}
-	bspc node -{f,s,n} {west,south,north,east}
+super + alt + {h,j,k,l}
+	bspc node -f {west,south,north,east}
+
+# swap the focused node in the given direction
+ctrl + super + {h,j,k,l}
+	bspc node -s {west,south,north,east}
+
+# transplant the focused node in the given direction
+ctrl + shift + {h,j,k,l}
+	bspc node -n {west,south,north,east}
+
 
 # focus the next/previous node in the current desktop
 #super + alt + {_,shift + }c
-alt + {_,shift + }c
+super + alt + {_,shift + }c
 	bspc node -f {next,prev}.local
 
 # focus the next/previous desktop in the current monitor
-alt + bracket{left,right}
+super + alt + bracket{left,right}
 	bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
@@ -75,13 +85,13 @@ alt + {grave,Tab}
 	bspc {node,desktop} -f last
 
 # focus the older or newer node in the focus history
-alt + {o,i}
+super + alt + {o,i}
 	bspc wm -h off; \
 	bspc node {older,newer} -f; \
 	bspc wm -h on
 
 # focus or send to the given desktop
-alt + {_,shift + }{1-9,0};
+ctrl + k; {alt + ,shift + }{1-9,0};
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
 #
@@ -89,19 +99,19 @@ alt + {_,shift + }{1-9,0};
 #
 
 # preselect the direction
-shift + ctrl + {h,j,k,l}
+ctrl + alt + {h,j,k,l}
 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
-shift + ctrl + {1-9}
+ctrl + alt + {1-9}
 	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
-shift + ctrl + space
+ctrl + alt + space
 	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
-shift + ctrl + alt + space
+ctrl + super + alt + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
 #
@@ -109,13 +119,13 @@ shift + ctrl + alt + space
 #
 
 # expand a window by moving one of its side outward
-alt + r; {h,j,k,l}:
+ctrl + k; m; {h,j,k,l}:
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-alt + r; shift + {h,j,k,l}:
+ctrl + k; m;  shift + {h,j,k,l}:
 	bspc node -z {left 20 0,bottom 0 -20,top 0 20,right -20 0}
 
 # move a floating window
-alt + {Left,Down,Up,Right}
+super + alt + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
