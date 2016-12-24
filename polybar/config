@@ -51,7 +51,7 @@ font-1 = unifont:size=6:heavy:fontformat=truetype;-2
 font-2 = siji:pixelsize=10;0
 
 modules-left = bspwm
-modules-center = xwindow 
+modules-center = xwindow
 modules-right =  memory cpu vpn date powermenu
 
 tray-position = right
@@ -372,7 +372,7 @@ menu-1-1 = reboot
 menu-1-1-exec = sudo reboot
 
 menu-2-0 = power off
-menu-2-0-exec = sudo poweroff
+menu-2-0-exec = poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
