@@ -1,0 +1,24 @@
+[
+  {
+    "defaults": {
+      "link": {
+        "create": true,
+        "relink": true
+      }
+    }
+  },
+  {
+    "clean": ["~"]
+  },
+  {
+    "link": {
+      "~/.zprofile": "zprofile",
+      "~/.xinitrc": "xinitrc",
+      "~/.Xresources": "Xresources",
+      "~/.config/compton.conf": "compton.conf",
+      "~/.config/bspwm": "bspwm",
+      "~/.config/sxhkd": "sxhkd",
+      "~/.config/polybar": "polybar"
+    }
+  }
+]
