@@ -4,25 +4,25 @@ source $ZPLUG_HOME/init.zsh
 isOSX="[[ $OSTYPE == *darwin* ]]"
 isLinux="[[ $OSTYPE == *linux* ]]"
 
-zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh"
-zplug "plugins/git", from:oh-my-zsh, if:"which git", nice:10
+zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:2
 zplug "plugins/rsync", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", nice:10
+zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:2
 zplug "plugins/sublime", from:oh-my-zsh
-zplug "plugins/yarn", from:oh-my-zsh, nice:10
-zplug "plugins/common-aliases", from:oh-my-zsh, nice:10
+zplug "plugins/yarn", from:oh-my-zsh, defer:2
+zplug "plugins/common-aliases", from:oh-my-zsh, defer:2
 zplug "plugins/brew", from:oh-my-zsh, if:$isOSX
-zplug "plugins/osx", from:oh-my-zsh, if:$isOSX, nice:10
+zplug "plugins/osx", from:oh-my-zsh, if:$isOSX, defer:2
 zplug "plugins/debian", from:oh-my-zsh, if:$isLinux
-zplug "knu/z", use:z.sh, nice:10
+zplug "knu/z", use:z.sh, defer:2
 zplug "rimraf/k", use:k.sh
 
 zplug "~/.zsh", from:local
+zplug "~/.zsh", from:local, as:theme
 zplug "~/", use:".extra", from:local, if:"[[ -f ~/.extra ]]"
 
-zplug "zsh-users/zsh-completions", nice:17
-zplug "zsh-users/zsh-syntax-highlighting", nice:18
-zplug "zsh-users/zsh-history-substring-search", nice:19
+zplug "zsh-users/zsh-completions", defer:3
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "zsh-users/zsh-history-substring-search", defer:3
 
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
 
