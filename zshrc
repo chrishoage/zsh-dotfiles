@@ -4,6 +4,7 @@ source $ZPLUG_HOME/init.zsh
 isOSX="[[ $OSTYPE == *darwin* ]]"
 isLinux="[[ $OSTYPE == *linux* ]]"
 
+zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh"
 zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:2
 zplug "plugins/rsync", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:2
