@@ -4,11 +4,11 @@ source $ZPLUG_HOME/init.zsh
 isOSX="[[ $OSTYPE == *darwin* ]]"
 isLinux="[[ $OSTYPE == *linux* ]]"
 
-zplug "lib/clipboard", from:oh-my-zsh, if:$isOSX
+zplug "lib/clipboard", from:oh-my-zsh
 zplug "lib/git", from:oh-my-zsh
 zplug "lib/theme-and-appearance", from:oh-my-zsh
-zplug "lib/prompt_info_functions", from:oh-my-zsh
 zplug "lib/compfix", from:oh-my-zsh, defer:0
+zplug "lib/completions", from:oh-my-zsh, defer:0
 zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:2
 zplug "plugins/rsync", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:2
@@ -20,7 +20,7 @@ zplug "plugins/common-aliases", from:oh-my-zsh, defer:2
 zplug "plugins/brew", from:oh-my-zsh, if:$isOSX
 zplug "plugins/osx", from:oh-my-zsh, if:$isOSX, defer:2
 zplug "plugins/debian", from:oh-my-zsh, if:$isLinux
-zplug "knu/z", use:z.sh, defer:2
+zplug "rupa/z", use:z.sh, defer:2
 zplug "rimraf/k", use:k.sh
 
 zplug "~/.zsh", from:local
@@ -32,7 +32,6 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:3, on:"zsh-users/zsh-completion
 zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
 
 zstyle ':completion:*' menu select
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
@@ -57,7 +56,13 @@ if ! zplug check; then
     fi
 fi
 
+unsetopt cdable_vars
+unsetopt auto_name_dirs
+
 zplug load
+
+unsetopt cdable_vars
+unsetopt auto_name_dirs
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
