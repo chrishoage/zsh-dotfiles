@@ -6,21 +6,24 @@ isLinux="[[ $OSTYPE == *linux* ]]"
 
 zplug "lib/clipboard", from:oh-my-zsh
 zplug "lib/git", from:oh-my-zsh
+zplug "lib/grep", from:oh-my-zsh
+zplug "lib/history", from:oh-my-zsh
+zplug "lib/key-bindings", from:oh-my-zsh
 zplug "lib/theme-and-appearance", from:oh-my-zsh
 zplug "lib/compfix", from:oh-my-zsh, defer:0
-zplug "lib/completions", from:oh-my-zsh, defer:0
-zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:2
+zplug "lib/completion", from:oh-my-zsh, defer:0
+zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:0
 zplug "plugins/rsync", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:2
+zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:0
 zplug "plugins/sublime", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh, defer:2
-zplug "plugins/docker-compose", from:oh-my-zsh, defer:2
-zplug "plugins/yarn", from:oh-my-zsh, defer:2
-zplug "plugins/common-aliases", from:oh-my-zsh, defer:2
+zplug "plugins/docker", from:oh-my-zsh, defer:0
+zplug "plugins/docker-compose", from:oh-my-zsh, defer:0
+zplug "plugins/yarn", from:oh-my-zsh, defer:0
+zplug "plugins/common-aliases", from:oh-my-zsh, defer:0
 zplug "plugins/brew", from:oh-my-zsh, if:$isOSX
-zplug "plugins/osx", from:oh-my-zsh, if:$isOSX, defer:2
+zplug "plugins/osx", from:oh-my-zsh, if:$isOSX, defer:0
 zplug "plugins/debian", from:oh-my-zsh, if:$isLinux
-zplug "rupa/z", use:z.sh, defer:2
+zplug "rupa/z", use:z.sh, defer:0
 zplug "rimraf/k", use:k.sh
 
 zplug "~/.zsh", from:local
@@ -31,11 +34,9 @@ zplug "zsh-users/zsh-completions", defer:0
 zplug "zsh-users/zsh-syntax-highlighting", defer:3, on:"zsh-users/zsh-completions"
 zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
 
-zstyle ':completion:*' menu select
-
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
-COMPLETION_WAITING_DOTS="true"
+COMPLETION_WAITING_DOTS="false"
 APPEND_HISTORY="true"
 
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
