@@ -4,11 +4,16 @@ source $ZPLUG_HOME/init.zsh
 isOSX="[[ $OSTYPE == *darwin* ]]"
 isLinux="[[ $OSTYPE == *linux* ]]"
 
-zplug "robbyrussell/oh-my-zsh", use:"lib/*.zsh"
+zplug "lib/clipboard", from:oh-my-zsh, if:$isOSX
+zplug "lib/git", from:oh-my-zsh
+zplug "lib/theme-and-appearance", from:oh-my-zsh
+zplug "lib/prompt_info_functions", from:oh-my-zsh
 zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:2
 zplug "plugins/rsync", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:2
 zplug "plugins/sublime", from:oh-my-zsh
+zplug "plugins/docker", from:oh-my-zsh, defer:2
+zplug "plugins/docker-compose", from:oh-my-zsh, defer:2
 zplug "plugins/yarn", from:oh-my-zsh, defer:2
 zplug "plugins/common-aliases", from:oh-my-zsh, defer:2
 zplug "plugins/brew", from:oh-my-zsh, if:$isOSX
@@ -25,7 +30,8 @@ zplug "zsh-users/zsh-completions", defer:3
 zplug "zsh-users/zsh-syntax-highlighting", defer:3
 zplug "zsh-users/zsh-history-substring-search", defer:3
 
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*'
+zstyle ':completion:*' menu select
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
