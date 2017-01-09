@@ -8,6 +8,7 @@ zplug "lib/clipboard", from:oh-my-zsh, if:$isOSX
 zplug "lib/git", from:oh-my-zsh
 zplug "lib/theme-and-appearance", from:oh-my-zsh
 zplug "lib/prompt_info_functions", from:oh-my-zsh
+zplug "lib/compfix", from:oh-my-zsh, defer:0
 zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:2
 zplug "plugins/rsync", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:2
@@ -26,9 +27,9 @@ zplug "~/.zsh", from:local
 zplug "~/.zsh", from:local, as:theme
 zplug "~/", use:".extra", from:local, if:"[[ -f ~/.extra ]]"
 
-zplug "zsh-users/zsh-completions", defer:3
-zplug "zsh-users/zsh-syntax-highlighting", defer:3
-zplug "zsh-users/zsh-history-substring-search", defer:3
+zplug "zsh-users/zsh-completions", defer:0
+zplug "zsh-users/zsh-syntax-highlighting", defer:3, on:"zsh-users/zsh-completions"
+zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
 
 zstyle ':completion:*' menu select
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
