@@ -31,8 +31,8 @@ zplug "~/.zsh", from:local, as:theme
 zplug "~/", use:".extra", from:local, if:"[[ -f ~/.extra ]]"
 
 zplug "zsh-users/zsh-completions", defer:0
-zplug "zsh-users/zsh-syntax-highlighting", defer:3, on:"zsh-users/zsh-completions"
-zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-syntax-highlighting", defer:3, on:"zsh-users/zsh-completions", defer: 3
+zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting", defer: 3
 
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
@@ -61,9 +61,6 @@ unsetopt cdable_vars
 unsetopt auto_name_dirs
 
 zplug load
-
-unsetopt cdable_vars
-unsetopt auto_name_dirs
 
 # You may need to manually set your language environment
 export LANG=en_US.UTF-8
