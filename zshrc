@@ -13,6 +13,7 @@ zplug "lib/theme-and-appearance", from:oh-my-zsh
 zplug "lib/compfix", from:oh-my-zsh, defer:0
 zplug "lib/completion", from:oh-my-zsh, defer:0
 zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:0
+zplug "plugins/gpg-agent", from:oh-my-zsh
 zplug "plugins/rsync", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:0
 zplug "plugins/sublime", from:oh-my-zsh
@@ -88,6 +89,9 @@ export MANPAGER="less -X"
 # Link Homebrew casks in `/Applications` rather than `~/Applications`
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
+# bind shift tab to reverse menu compelte
+bindkey -M menuselect '^[[Z' reverse-menu-complete
+
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
@@ -105,3 +109,4 @@ bindkey -M emacs '^N' history-substring-search-down
 # bind k and j for VI mode
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
