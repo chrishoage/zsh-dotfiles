@@ -32,8 +32,8 @@ zplug "~/.zsh", from:local, as:theme
 zplug "~/", use:".extra", from:local, if:"[[ -f ~/.extra ]]"
 
 zplug "zsh-users/zsh-completions", defer:0
-zplug "zsh-users/zsh-syntax-highlighting", defer:3, on:"zsh-users/zsh-completions", defer: 3
-zplug "zsh-users/zsh-history-substring-search", defer:3, on:"zsh-users/zsh-syntax-highlighting", defer: 3
+zplug "zsh-users/zsh-syntax-highlighting", defer:3
+zplug "zsh-users/zsh-history-substring-search", defer:3
 
 DISABLE_AUTO_UPDATE="true"
 DISABLE_AUTO_TITLE="true"
@@ -89,9 +89,6 @@ export MANPAGER="less -X"
 # Link Homebrew casks in `/Applications` rather than `~/Applications`
 export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
-# bind shift tab to reverse menu compelte
-bindkey -M menuselect '^[[Z' reverse-menu-complete
-
 # bind UP and DOWN arrow keys
 zmodload zsh/terminfo
 bindkey "$terminfo[kcuu1]" history-substring-search-up
@@ -109,4 +106,7 @@ bindkey -M emacs '^N' history-substring-search-down
 # bind k and j for VI mode
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+
+# bind shift tab to reverse menu compelte
+bindkey -M menuselect '^[[Z' reverse-menu-complete
 
