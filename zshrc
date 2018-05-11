@@ -110,3 +110,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 # bind shift tab to reverse menu compelte
 bindkey -M menuselect '^[[Z' reverse-menu-complete
 
+# Restore hyphen tab completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
