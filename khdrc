@@ -66,90 +66,70 @@
 # TODO(koekeishiya): possibly allow combined syntax such as
 # [switcher,ytd] + ctrl - f : khd -e "mode activate default"
 
-# enable kwm compatibility mode
-khd kwm on
-
-# set border color for different modes
-khd mode default color 0xFF6699CC
 khd mode prefix prefix on
 khd mode prefix timeout 0.5
-khd mode prefix color 0xFFFAC863
-khd mode manage color 0xFFC594C5
+
+# set border color for different modes
+khd mode default on_enter chunkc border::color 0xFF6699CC
+khd mode prefix on_enter chunkc border::color 0xFFFAC863
+khd mode manage on_enter chunkc border::color 0xFFC594C5
+khd mode insert on_enter chunkc border::color 0xFFF99157
 
 ctrl - k                  : khd -e "mode activate prefix"
+prefix - i                : khd -e "mode activate insert" ; khd -e "void_unlisted_bind off"
 prefix - m                : khd -e "mode activate manage"
 manage - 0x35             : khd -e "mode activate default"
+insert - 0x35             : khd -e "mode activate default" ; khd -e "void_unlisted_bind on"
 
 # prefix
 
-prefix + cmd + shift - r  : kwmc tree -c refresh
-prefix + cmd - q          : kwmc quit
-prefix - 0x2A             : kwmc window -c split-mode toggle
+prefix + cmd + shift - r  : chunkc tiling::desktop --equalize
+prefix - 0x2A             : chunkc tiling::window --toggle split
 
 # Toggle window state
-prefix + shift - f        : kwmc window -z fullscreen
-prefix - p                : kwmc window -z parent
-prefix - w                : kwmc window -t focused
-
-# Swap marked window with focused window
-prefix - x                : kwmc window -m mark
+prefix + shift - f        : chunkc tiling::window --toggle fullscreen
+prefix - p                : chunkc tiling::window --toggle parent
+prefix - w                : chunkc tiling::window --toggle float
 
 # Move focused window to display
-prefix + cmd - 1          : kwmc window -m display 0
-prefix + cmd - 2          : kwmc window -m display 1
+prefix + cmd - 1          : chunkc tiling::window --send-to-monitor 1
+prefix + cmd - 2          : chunkc tiling::window --send-to-monitor 2
 
 # Move focused window to space
-prefix + shift - 1        : kwmc window -m space 1
-prefix + shift - 2        : kwmc window -m space 2
-prefix + shift - 3        : kwmc window -m space 3
+prefix + shift - 1        : chunkc tiling::window --send-to-desktop 1
+prefix + shift - 2        : chunkc tiling::window --send-to-desktop 2
+prefix + shift - 3        : chunkc tiling::window --send-to-desktop 3
 
 # Set space tiling mode
-prefix + b                : kwmc space -t bsp
-prefix + f                : kwmc space -t monocle
-prefix + w                : kwmc space -t float
+prefix + b                : chunkc tiling::desktop --layout bsp
+prefix + f                : chunkc tiling::desktop --layout monocle
+prefix + w                : chunkc tiling::desktop --layout float
 
 # Rotate tree 90 clockwise
-prefix + cmd - r          : kwmc tree -r 90
-
-# Swap window with marked window
-prefix - s                : kwmc window -s mark
+prefix + cmd - r          : chunkc tiling::desktop --rotate 90
 
 # Restore code layout
-prefix - c                : kwmc tree restore code
+prefix - c                : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/code
 
 # Expand focused window in direction
-manage + cmd - h          : kwmc window -c expand 0.025 west
-manage + cmd - j          : kwmc window -c expand 0.025 south
-manage + cmd - k          : kwmc window -c expand 0.025 north
-manage + cmd - l          : kwmc window -c expand 0.025 east
+manage + cmd - h          : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge west
+manage + cmd - j          : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge south
+manage + cmd - k          : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge north
+manage + cmd - l          : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge east
 
 # Reduce focused window in direction
-manage + cmd + shift - h  : kwmc window -c reduce 0.025 west
-manage + cmd + shift - j  : kwmc window -c reduce 0.025 south
-manage + cmd + shift - k  : kwmc window -c reduce 0.025 north
-manage + cmd + shift - l  : kwmc window -c reduce 0.025 east
+manage + cmd + shift - h  : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge west
+manage + cmd + shift - j  : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge south
+manage + cmd + shift - k  : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge north
+manage + cmd + shift - l  : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge east
 
-# Increase Container Gaps
-manage - x                : kwmc space -g increase horizontal
-manage - y                : kwmc space -g increase vertical
-
-# Decrease Container Gaps
-manage + shift - x        : kwmc space -g decrease horizontal
-manage + shift - y        : kwmc space -g decrease vertical
+# Container Gaps
+manage - g                : chunkc tiling::desktop --gap inc
+manage + shift - g        : chunkc tiling::desktop --gap dec
 
 # Increase Screen Padding
-manage - left             : kwmc space -p increase left
-manage - right            : kwmc space -p increase right
-manage - up               : kwmc space -p increase top
-manage - down             : kwmc space -p increase bottom
-manage - p                : kwmc space -p increase all
-
-# Decrease Screen Padding
-manage + shift - left     : kwmc space -p decrease left
-manage + shift - right    : kwmc space -p decrease right
-manage + shift - up       : kwmc space -p decrease top
-manage + shift - down     : kwmc space -p decrease bottom
-manage + shift - p        : kwmc space -p decrease all
+manage - p                : chunkc tiling::desktop --padding inc
+manage + shift - p        : chunkc tiling::desktop --padding dec
 
 # Global keybinds
 
@@ -157,37 +137,41 @@ manage + shift - p        : kwmc space -p decrease all
 cmd - return           : exec ~/bin/open-iTerm.applescript
 
 # Mark focused window for next insertion point
-ctrl + shift - m          : kwmc window -mk focused
+# ctrl + shift - m          : kwmc window -mk focused
 
 # Focus window in direction
-cmd + alt - h             : kwmc window -f west
-cmd + alt - j             : kwmc window -f south
-cmd + alt - k             : kwmc window -f north
-cmd + alt - l             : kwmc window -f east
+cmd + alt - h             : chunkc tiling::window --focus west
+cmd + alt - j             : chunkc tiling::window --focus south
+cmd + alt - k             : chunkc tiling::window --focus north
+cmd + alt - l             : chunkc tiling::window --focus east
 
-cmd + alt - c             : kwmc window -f next
-cmd + alt + shift - c     : kwmc window -f prev
+cmd + alt - c             : chunkc tiling::window --focus next
+cmd + alt + shift - c     : chunkc tiling::window --focus prev
 
 # Swap Focused Window
-ctrl + alt - h           :    kwmc window -s west
-ctrl + alt - j           :    kwmc window -s south
-ctrl + alt - k           :    kwmc window -s north
-ctrl + alt - l           :    kwmc window -s east
-ctrl + alt - m           :    kwmc window -s mark
+ctrl + alt - h           :  chunkc tiling::window --swap west
+ctrl + alt - j           :  chunkc tiling::window --swap south
+ctrl + alt - k           :  chunkc tiling::window --swap north
+ctrl + alt - l           :  chunkc tiling::window --swap east
 
 # Detach Focused Window And Reinsert In Direction
-ctrl + shift - k          :    kwmc window -m north
-ctrl + shift - l          :    kwmc window -m east
-ctrl + shift - j          :    kwmc window -m south
-ctrl + shift - h          :    kwmc window -m west
+ctrl + shift - h         : chunkc tiling::window --warp west
+ctrl + shift - j         : chunkc tiling::window --warp south
+ctrl + shift - k         : chunkc tiling::window --warp north
+ctrl + shift - l         : chunkc tiling::window --warp east
 
-# Detach Marked Window And Reinsert At Focused Window
-ctrl + shift - x         :    kwmc window -m mark
+# Set next insertion point in direction
+
+ctrl + cmd - h           : chunkc tiling::window --use-insertion-point west
+ctrl + cmd - j           : chunkc tiling::window --use-insertion-point south
+ctrl + cmd - k           : chunkc tiling::window --use-insertion-point north
+ctrl + cmd - l           : chunkc tiling::window --use-insertion-point east
+ctrl + cmd - c           : chunkc tiling::window --use-insertion-point cancel
 
 # Cycle focus though displays
-cmd + alt - p             : kwmc display -f prev
-cmd + alt - n             : kwmc display -f next
+cmd + alt - p             : chunkc tiling::monitor -f prev
+cmd + alt - n             : chunkc tiling::monitor -f next
 
 # Cycle focus though spaces
-cmd + alt - 0x21          : kwmc space -fExperimental left
-cmd + alt - 0x1E          : kwmc space -fExperimental right
+cmd + alt - 0x21          : khd -p "ctrl - left"
+cmd + alt - 0x1E          : khd -p "ctrl - right"
