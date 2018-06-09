@@ -13,7 +13,7 @@ zplug "lib/theme-and-appearance", from:oh-my-zsh
 zplug "lib/compfix", from:oh-my-zsh, defer:0
 zplug "lib/completion", from:oh-my-zsh, defer:0
 zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:0
-zplug "plugins/gpg-agent", from:oh-my-zsh
+zplug "modules/gpg", from:prezto
 zplug "plugins/rsync", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:0
 zplug "plugins/sublime", from:oh-my-zsh
