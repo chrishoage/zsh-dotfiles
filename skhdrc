@@ -1,0 +1,164 @@
+#  NOTE(koekeishiya): A list of all built-in modifier and literal keywords can
+#                     be found at https://github.com/koekeishiya/skhd/issues/1
+#
+#                     A hotkey is written according to the following rules:
+#
+#                       hotkey   = <mode> '<' <action> | <action>
+#
+#                       mode     = 'name of mode' | <mode> ',' <mode>
+#
+#                       action   = <keysym> ':' <command> | <keysym> '->' ':' <command>
+#                                  <keysym> ';' <mode>    | <keysym> '->' ';' <mode>
+#
+#                       keysym   = <mod> '-' <key> | <key>
+#
+#                       mod      = 'built-in mod keyword' | <mod> '+' <mod>
+#
+#                       key      = <literal> | <keycode>
+#
+#                       literal  = 'single letter or built-in keyword'
+#
+#                       keycode  = 'apple keyboard kVK_<Key> values (0x3C)'
+#
+#                       ->       = keypress is not consumed by skhd
+#
+#                       command  = command is executed through '$SHELL -c' and
+#                                  follows valid shell syntax. if the $SHELL environment
+#                                  variable is not set, it will default to '/bin/bash'.
+#                                  when bash is used, the ';' delimeter can be specified
+#                                  to chain commands.
+#
+#                                  to allow a command to extend into multiple lines,
+#                                  prepend '\' at the end of the previous line.
+#
+#                                  an EOL character signifies the end of the bind.
+#
+#
+#  NOTE(koekeishiya): A mode is declared according to the following rules:
+#
+#                       mode_decl = '::' <name> '@' ':' <command> | '::' <name> ':' <command> |
+#                                   '::' <name> '@'               | '::' <name>
+#
+#                       name      = desired name for this mode,
+#
+#                       @         = capture keypresses regardless of being bound to an action
+#
+#                       command  = command is executed through '$SHELL -c' and
+#                                  follows valid shell syntax. if the $SHELL environment
+#                                  variable is not set, it will default to '/bin/bash'.
+#                                  when bash is used, the ';' delimeter can be specified
+#                                  to chain commands.
+#
+#                                  to allow a command to extend into multiple lines,
+#                                  prepend '\' at the end of the previous line.
+#
+#                                  an EOL character signifies the end of the bind.
+
+
+# Define the modes
+# prefix is to activate other modes, it consumes all key presses
+# manage is to manage chunkwm, it consumes all key presses
+# insert is to be free of all key bindings
+
+:: default    : chunkc border::color 0xFF6699CC
+:: prefix @   : chunkc border::color 0xFFFAC863
+:: nobind     : chunkc border::color 0xFFF99157
+:: manage @   : chunkc border::color 0xFFC594C5
+
+prefix, nobind, manage  < escape    ; default
+ctrl - k                            ; prefix
+prefix                  < i         ; nobind
+prefix                  < m         ; manage
+
+# Rebalance BSP Tree
+prefix                   < cmd + shift - r   : chunkc tiling::desktop --equalize
+
+# Change the split mode of the current node (\)
+prefix                   < 0x2A              : chunkc tiling::window --toggle split
+
+# Toggle window state of focused node
+prefix                    < shift - f        : chunkc tiling::window --toggle fullscreen
+prefix                    < p                : chunkc tiling::window --toggle parent
+prefix                    < w                : chunkc tiling::window --toggle float
+
+# Move focused window to display
+prefix                    < cmd - 1          : chunkc tiling::window --send-to-monitor 1
+prefix                    < cmd - 2          : chunkc tiling::window --send-to-monitor 2
+
+# Move focused window to space
+prefix                    < shift - 1        : chunkc tiling::window --send-to-desktop 1
+prefix                    < shift - 2        : chunkc tiling::window --send-to-desktop 2
+prefix                    < shift - 3        : chunkc tiling::window --send-to-desktop 3
+
+# Set space tiling mode
+prefix                    < b                : chunkc tiling::desktop --layout bsp
+prefix                    < f                : chunkc tiling::desktop --layout monocle
+prefix                    < w                : chunkc tiling::desktop --layout float
+
+# Rotate tree 90 clockwise
+prefix                    < cmd - r          : chunkc tiling::desktop --rotate 90
+
+# Restore code layout
+prefix                    < c                : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/code
+
+# Expand focused window in direction
+manage                    < cmd - h          : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge west
+manage                    < cmd - j          : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge south
+manage                    < cmd - k          : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge north
+manage                    < cmd - l          : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge east
+
+# Reduce focused window in direction
+manage                    < cmd + shift - h  : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge west
+manage                    < cmd + shift - j  : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge south
+manage                    < cmd + shift - k  : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge north
+manage                    < cmd + shift - l  : chunkc tiling::window --use-temporary-ratio -0.025 --adjust-window-edge east
+
+# Container Gaps
+manage                    < g                : chunkc tiling::desktop --gap inc
+manage                    < shift - g        : chunkc tiling::desktop --gap dec
+
+# Increase Screen Padding
+manage                    < p                : chunkc tiling::desktop --padding inc
+manage                    < shift - p        : chunkc tiling::desktop --padding dec
+
+# Global keybinds
+
+# Open new iTerm window
+cmd - return              : exec ~/bin/open-iTerm.applescript
+
+# Focus window in direction
+cmd + alt - h             : chunkc tiling::window --focus west
+cmd + alt - j             : chunkc tiling::window --focus south
+cmd + alt - k             : chunkc tiling::window --focus north
+cmd + alt - l             : chunkc tiling::window --focus east
+
+cmd + alt - c             : chunkc tiling::window --focus next
+cmd + alt + shift - c     : chunkc tiling::window --focus prev
+
+# Swap Focused Window
+ctrl + alt - h           :  chunkc tiling::window --swap west
+ctrl + alt - j           :  chunkc tiling::window --swap south
+ctrl + alt - k           :  chunkc tiling::window --swap north
+ctrl + alt - l           :  chunkc tiling::window --swap east
+
+# Detach Focused Window And Reinsert In Direction
+ctrl + shift - h         : chunkc tiling::window --warp west
+ctrl + shift - j         : chunkc tiling::window --warp south
+ctrl + shift - k         : chunkc tiling::window --warp north
+ctrl + shift - l         : chunkc tiling::window --warp east
+
+# Set next insertion point in direction
+
+ctrl + cmd - h           : chunkc tiling::window --use-insertion-point west
+ctrl + cmd - j           : chunkc tiling::window --use-insertion-point south
+ctrl + cmd - k           : chunkc tiling::window --use-insertion-point north
+ctrl + cmd - l           : chunkc tiling::window --use-insertion-point east
+ctrl + cmd - c           : chunkc tiling::window --use-insertion-point cancel
+
+# Cycle focus though displays
+cmd + alt - p             : chunkc tiling::monitor -f prev
+cmd + alt - n             : chunkc tiling::monitor -f next
+
+# Cycle focus though spaces
+cmd + alt - 0x21          : qes -k "ctrl - left"
+cmd + alt - 0x1E          : qes -k "ctrl - right"

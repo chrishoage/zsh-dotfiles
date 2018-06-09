@@ -6,7 +6,7 @@
     "link": {
       "~/.chunkwmrc": "chunkwmrc",
       "~/.chunkwm_layouts": "chunkwm_layouts/",
-      "~/.khdrc": "khdrc"
+      "~/.skhdrc": "skhdrc"
     }
   }
 ]
