@@ -1,6 +1,3 @@
-[user]
-	name = "Chris Hoage"
-	email = iam@chrishoage.com
 [alias]
 	# View abbreviated SHA, description, and history graph of the latest 20 commits
 	l = log --pretty=oneline --graph --abbrev-commit
@@ -46,6 +43,10 @@
 [apply]
 	# Detect whitespace errors when applying a patch
 	whitespace = warn
+
+
+[include]
+  path = ~/.extra.gitconfig
 
 [core]
 	# Use custom `.gitignore` and `.gitattributes`
@@ -101,5 +102,3 @@
 
 [pull]
 	rebase = true
-[commit]
-	gpgsign = true
