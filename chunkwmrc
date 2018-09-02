@@ -80,8 +80,11 @@ chunkc core::load ffm.so
 #       to pass value containing a whitespace.
 #
 
+chunkc tiling::rule --owner 1Password --role AXWindow --subrole AXDialog --state tile
 chunkc tiling::rule --owner iTerm2 --role AXWindow --subrole AXDialog --state tile
 chunkc tiling::rule --owner Keybase --role AXWindow --subrole AXDialog --state tile
 chunkc tiling::rule --owner Finder --name Copy --state float
 chunkc tiling::rule --owner \"System Preferences\" --state float
 chunkc tiling::rule --owner Steam --state float
+
+chunkwm --load-sa

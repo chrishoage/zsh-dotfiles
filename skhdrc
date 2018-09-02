@@ -71,35 +71,35 @@ prefix                  < i         ; nobind
 prefix                  < m         ; manage
 
 # Rebalance BSP Tree
-prefix                   < cmd + shift - r   : chunkc tiling::desktop --equalize
+prefix                   < cmd + shift - r   : chunkc tiling::desktop --equalize; qes -k "escape"
 
 # Change the split mode of the current node (\)
-prefix                   < 0x2A              : chunkc tiling::window --toggle split
+prefix                   < 0x2A              : chunkc tiling::window --toggle split; qes -k "escape"
 
 # Toggle window state of focused node
-prefix                    < shift - f        : chunkc tiling::window --toggle fullscreen
-prefix                    < p                : chunkc tiling::window --toggle parent
-prefix                    < w                : chunkc tiling::window --toggle float
+prefix                    < shift - f        : chunkc tiling::window --toggle fullscreen; qes -k "escape"
+prefix                    < p                : chunkc tiling::window --toggle parent; qes -k "escape"
+prefix                    < shift - w                : chunkc tiling::window --toggle float; qes -k "escape"
 
 # Move focused window to display
-prefix                    < cmd - 1          : chunkc tiling::window --send-to-monitor 1
-prefix                    < cmd - 2          : chunkc tiling::window --send-to-monitor 2
+prefix                    < cmd - 1          : chunkc tiling::window --send-to-monitor 1; qes -k "escape"
+prefix                    < cmd - 2          : chunkc tiling::window --send-to-monitor 2; qes -k "escape"
 
 # Move focused window to space
-prefix                    < shift - 1        : chunkc tiling::window --send-to-desktop 1
-prefix                    < shift - 2        : chunkc tiling::window --send-to-desktop 2
-prefix                    < shift - 3        : chunkc tiling::window --send-to-desktop 3
+prefix                    < shift - 1        : chunkc tiling::window --send-to-desktop 1; qes -k "escape"
+prefix                    < shift - 2        : chunkc tiling::window --send-to-desktop 2; qes -k "escape"
+prefix                    < shift - 3        : chunkc tiling::window --send-to-desktop 3; qes -k "escape"
 
 # Set space tiling mode
-prefix                    < b                : chunkc tiling::desktop --layout bsp
-prefix                    < f                : chunkc tiling::desktop --layout monocle
-prefix                    < w                : chunkc tiling::desktop --layout float
+prefix                    < b                : chunkc tiling::desktop --layout bsp; qes -k "escape"
+prefix                    < f                : chunkc tiling::desktop --layout monocle; qes -k "escape"
+prefix                    < w                : chunkc tiling::desktop --layout float; qes -k "escape"
 
 # Rotate tree 90 clockwise
-prefix                    < cmd - r          : chunkc tiling::desktop --rotate 90
+prefix                    < cmd - r          : chunkc tiling::desktop --rotate 90; qes -k "escape"
 
 # Restore code layout
-prefix                    < c                : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/code
+prefix                    < c                : chunkc tiling::desktop --deserialize ~/.chunkwm_layouts/code; qes -k "escape"
 
 # Expand focused window in direction
 manage                    < cmd - h          : chunkc tiling::window --use-temporary-ratio 0.025 --adjust-window-edge west
@@ -160,5 +160,7 @@ cmd + alt - p             : chunkc tiling::monitor -f prev
 cmd + alt - n             : chunkc tiling::monitor -f next
 
 # Cycle focus though spaces
-cmd + alt - 0x21          : qes -k "ctrl - left"
-cmd + alt - 0x1E          : qes -k "ctrl - right"
+cmd + alt - 0x21          : chunkc tiling::desktop --focus prev
+#cmd + alt - 0x21          : qes -k "ctrl - left"
+cmd + alt - 0x1E          : chunkc tiling::desktop --focus next
+#cmd + alt - 0x1E          : qes -k "ctrl - right"
