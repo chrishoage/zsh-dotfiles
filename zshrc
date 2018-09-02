@@ -13,7 +13,7 @@ zplug "lib/theme-and-appearance", from:oh-my-zsh
 zplug "lib/compfix", from:oh-my-zsh, defer:0
 zplug "lib/completion", from:oh-my-zsh, defer:0
 zplug "plugins/git", from:oh-my-zsh, if:"which git", defer:0
-zplug "modules/gpg", from:prezto
+zplug "modules/gpg", from:prezto, if:"which gpg-agent"
 zplug "plugins/rsync", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh, if:"which tmux", defer:0
 zplug "plugins/sublime", from:oh-my-zsh
@@ -22,7 +22,6 @@ zplug "plugins/docker-compose", from:oh-my-zsh, defer:0
 zplug "plugins/yarn", from:oh-my-zsh, defer:0
 zplug "plugins/common-aliases", from:oh-my-zsh, defer:0
 zplug "plugins/brew", from:oh-my-zsh, if:$isOSX
-zplug "plugins/osx", from:oh-my-zsh, if:$isOSX, defer:0
 zplug "plugins/debian", from:oh-my-zsh, if:$isLinux
 zplug "rupa/z", use:z.sh, defer:0
 zplug "rimraf/k", use:k.sh
