@@ -23,6 +23,14 @@ if [ -f "$usermodmap" ]; then
   xmodmap "$usermodmap"
 fi
 
+# set up and order displays
+
+#xrandr --output DP-1 --mode 2560x1440 --rate 120 --left-of eDP-1 \
+#       --output DP-2 --left-of DP-1 \
+#       --output eDP-1 --mode 1440x900
+
+autorandr -c # detect display profile and change to it 
+
 # start some nice programs
 
 if [ -d /etc/X11/xinit/xinitrc.d ]; then
@@ -32,9 +40,6 @@ if [ -d /etc/X11/xinit/xinitrc.d ]; then
   unset f
 fi
 
-VBoxClient --clipboard
-VBoxClient --display
-
 #remap caps lock to control
 setxkbmap -option 'caps:ctrl_modifier'
 
@@ -43,6 +48,8 @@ if [ -d ~/.fonts ]; then
   xset +fp ~/.fonts
   xset fp rehash
 fi
+
+wal -R
 
 #set wallpaper
 feh --bg-fill ~/.wallpapers/blue-red-poly.jpg &
@@ -54,5 +61,4 @@ xsetroot -cursor_name left_ptr &
 
 #wm
 compton &
-sxhkd &
 exec bspwm

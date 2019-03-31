@@ -50,10 +50,6 @@ ctrl + k; {t,shift + t,w,shift + f}
 ctrl + k; {l,s,p}
 	bspc node -g {locked,sticky,private}
 
-# change automatic mode to be more like kwm
-ctrl + k; {a, shift + a}
-  bspc config external_rules_command {no, ~/.config/bspwm/pseudo_automatic_mode}
-
 #
 # focus/swap
 #
@@ -63,7 +59,7 @@ super + alt + {h,j,k,l}
 	bspc node -f {west,south,north,east}
 
 # swap the focused node in the given direction
-ctrl + super + {h,j,k,l}
+ctrl + alt + {h,j,k,l}
 	bspc node -s {west,south,north,east}
 
 # transplant the focused node in the given direction
@@ -79,6 +75,10 @@ super + alt + {_,shift + }c
 # focus the next/previous desktop in the current monitor
 super + alt + bracket{left,right}
 	bspc desktop -f {prev,next}.local
+
+# focus the next/previous monitor
+super + alt + {p,n}
+	bspc monitor -f {prev,next} --follow
 
 # focus the last node/desktop
 alt + {grave,Tab}
@@ -99,15 +99,15 @@ ctrl + k; {alt + ,shift + }{1-9,0};
 #
 
 # preselect the direction
-ctrl + alt + {h,j,k,l}
-	bspc node -p {west,south,north,east}
+ctrl + super + {h,j,k,l,c}
+	bspc node -p {west,south,north,east,cancel}
 
 # preselect the ratio
-ctrl + alt + {1-9}
+ctrl + super + {1-9}
 	bspc node -o 0.{1-9}
 
 # cancel the preselection for the focused node
-ctrl + alt + space
+ctrl + super + space
 	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
@@ -119,11 +119,11 @@ ctrl + super + alt + space
 #
 
 # expand a window by moving one of its side outward
-ctrl + k; m; {h,j,k,l}:
+ctrl + k; m : {h,j,k,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-ctrl + k; m;  shift + {h,j,k,l}:
+ctrl + k; m : shift + {h,j,k,l}
 	bspc node -z {left 20 0,bottom 0 -20,top 0 20,right -20 0}
 
 # move a floating window
