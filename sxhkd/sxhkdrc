@@ -70,7 +70,7 @@ ctrl + super + {h,j,k,l}
 
 # warp the focused node in the given direction
 ctrl + shift + {h,j,k,l}
-	$HOME/bin/bspwm-warp {west,south,north,east}.local
+	$HOME/.config/bspwm/bspwm-warp {west,south,north,east}.local
 
 # focus the next/previous node in the current desktop
 #super + alt + {_,shift + }c

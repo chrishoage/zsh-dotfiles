@@ -152,7 +152,7 @@ type = custom/script
 format = ""
 ;label = "+"
 exec = echo "+"
-click-left = $HOME/bin/bspwm-create-ws
+click-left = $HOME/.config/bspwm/bspwm-create-ws
 click-right = bspc desktop -r
 
 [module/cpu]
