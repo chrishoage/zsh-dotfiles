@@ -8,7 +8,10 @@ alt + Return
 
 # program launcher
 alt + space
-	rofi -show run
+	rofi -show drun -show-icons
+
+super + alt + space
+	rofi -show window
 
 # make sxhkd reload its configuration files:
 alt + Escape
@@ -27,27 +30,26 @@ alt + {_,shift + }w
 	bspc node -{c,k}
 
 # set tiled layout
-ctrl + k; b
+alt + k; b
 	bspc desktop -l tiled
 
 # set monocle layout
-ctrl + k; f
+alt + k; f
 	bspc desktop -l monocle
 
 # swap the current node and the biggest node
 alt + g
-	bspc node -s biggest
+	bspc node -s biggest.local
 
 #
 # state/flags
 #
 
 # set the window state
-ctrl + k; {t,shift + t,w,shift + f}
+alt + k; {t,shift + t,w,shift + f}
 	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
-
 # set the node flags
-ctrl + k; {l,s,p}
+alt + k; {l,s,p}
 	bspc node -g {locked,sticky,private}
 
 #
@@ -59,22 +61,25 @@ super + alt + {h,j,k,l}
 	bspc node -f {west,south,north,east}
 
 # swap the focused node in the given direction
-ctrl + alt + {h,j,k,l}
-	bspc node -s {west,south,north,east}
+ctrl + super + {h,j,k,l}
+	bspc node -s {west,south,north,east}.local
 
 # transplant the focused node in the given direction
-ctrl + shift + {h,j,k,l}
-	bspc node -n {west,south,north,east}
+#ctrl + super + {h,j,k,l}
+#	bspc node -n {west,south,north,east}.local
 
+# warp the focused node in the given direction
+ctrl + shift + {h,j,k,l}
+	$HOME/bin/bspwm-warp {west,south,north,east}.local
 
 # focus the next/previous node in the current desktop
 #super + alt + {_,shift + }c
 super + alt + {_,shift + }c
 	bspc node -f {next,prev}.local
 
-# focus the next/previous desktop in the current monitor
-super + alt + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+# focus or send the next/previous desktop in the current monitor
+super + alt + {_,shift + }bracket{left,right}
+	bspc desktop -{f,s} {prev,next}.local
 
 # focus the next/previous monitor
 super + alt + {p,n}
@@ -91,24 +96,24 @@ super + alt + {o,i}
 	bspc wm -h on
 
 # focus or send to the given desktop
-ctrl + k; {alt + ,shift + }{1-9,0};
-	bspc {desktop -f,node -d} '^{1-9,10}'
+alt + k; alt + {1-9,0}
+	bspc node -d '{1-9,10}'
+
+# focus or send to the given desktop
+alt + k; shift + {1-9,0}
+	bspc node -m \^{1-9,10}
 
 #
 # preselect
 #
 
 # preselect the direction
-ctrl + super + {h,j,k,l,c}
+ctrl + alt + {h,j,k,l,c}
 	bspc node -p {west,south,north,east,cancel}
 
 # preselect the ratio
-ctrl + super + {1-9}
+ctrl + alt + {1-9}
 	bspc node -o 0.{1-9}
-
-# cancel the preselection for the focused node
-ctrl + super + space
-	bspc node -p cancel
 
 # cancel the preselection for the focused desktop
 ctrl + super + alt + space
@@ -119,13 +124,27 @@ ctrl + super + alt + space
 #
 
 # expand a window by moving one of its side outward
-ctrl + k; m : {h,j,k,l}
+alt + k; m : {h,j,k,l}
 	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
 
 # contract a window by moving one of its side inward
-ctrl + k; m : shift + {h,j,k,l}
+alt + k; m : shift + {h,j,k,l}
 	bspc node -z {left 20 0,bottom 0 -20,top 0 20,right -20 0}
 
 # move a floating window
 super + alt + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+# move/resize window
+super + button1
+	bspc pointer -g resize_side
+
+# window manager
+XF86Audio{LowerVolume,RaiseVolume,Mute} + {_,shift}
+	pulseaudio-ctl {down,up,mute} {5,1}
+
+ctrl + shift + Pause
+	light-locker-command -l
+
+Print
+	flameshot gui

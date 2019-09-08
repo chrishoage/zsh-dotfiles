@@ -18,7 +18,10 @@
       "~/.config/compton.conf": "compton.conf",
       "~/.config/bspwm": "bspwm",
       "~/.config/sxhkd": "sxhkd",
-      "~/.config/polybar": "polybar"
+      "~/.config/polybar": "polybar",
+      "~/.config/rofi": "rofi",
+      "~/.config/mpv": "mpv",
+      "~/.config/wal": "wal"
     }
   }
 ]

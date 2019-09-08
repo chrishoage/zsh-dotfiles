@@ -41,13 +41,17 @@ Xft.rgba:       rgb
 Xft.hinting:    true
 Xft.hintstyle:  hintslight
 
-URxvt*font:                    xft:Operator\ Mono:pixelsize=13:style=Regular
-URxvt*boldFont:                xft:Operator\ Mono:pixelsize=13:style=Bold
-URxvt*italicFont:              xft:Operator\ Mono:pixelsize=13:style=Book\ Italic
-URxvt*bolditalicFont:          xft:Operator\ Mono:pixelsize=13:style=Bold\ Italic
+URxvt*font:                    xft:Operator\ Mono:pixelsize=13:style=Regular,\
+                               xft:Noto\ Emoji:antialias=true:size=10, \
+                               xft:icomoon\-feather:style=Regular:size=10,\
+                               -wuncon-siji-medium-r-normal--10-100-75-75-c-80-iso10646-1,\
+                               -misc-fontawesome-medium-r-normal--0-0-0-0-p-0-iso10646-1
+URxvt*boldFont:                xft:Operator\ Mono:pixelsize=13:style=Bold:antialias=true
+URxvt*italicFont:              xft:Operator\ Mono:pixelsize=13:style=Book\ Italic:antialias=true
+URxvt*bolditalicFont:          xft:Operator\ Mono:pixelsize=13:style=Bold\ Italic:antialias=true
 
 urxvt*perl-lib:     /usr/lib/urxvt/perl
-urxvt*perl-ext-common:    default,matcher,clipboard,font-size
+urxvt*perl-ext-common:    default,matcher,clipboard,selection-to-clipboard,font-size
 urxvt*perl-matcher:     1
 urxvt*matcher-button:     3
 urxvt*url-launcher:   /usr/bin/firefox

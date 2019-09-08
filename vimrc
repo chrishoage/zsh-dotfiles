@@ -11,7 +11,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'Raimondi/delimitMate'
 Plug 'bling/vim-airline'
 Plug 'mhartington/oceanic-next'
-Plug 'evanmiller/nginx-vim-syntax'
+Plug 'dylanaraps/wal.vim'
 call plug#end()
 
 " Make Vim more useful
@@ -67,7 +67,7 @@ set shiftwidth=2
 set modeline
 
 set t_Co=256
-colorscheme OceanicNext
+colorscheme wal
 set background=dark
 
-let g:airline_theme='oceanicnext'
+let g:airline_theme='wal'

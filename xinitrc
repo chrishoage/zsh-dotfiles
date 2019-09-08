@@ -61,4 +61,6 @@ xsetroot -cursor_name left_ptr &
 
 #wm
 compton &
+redshift &
+light-locker &
 exec bspwm

@@ -11,9 +11,10 @@
 background = ${xrdb:background:#121b21}
 background-alt = ${xrdb:color8:#4F5B66}
 foreground = ${xrdb:foreground:#D8DEE9}
-foreground-alt = #65737E
-primary = ${xrdb:color4:#6699CC}
-secondary = ${xrdb:color5:#C594C5}
+foreground-alt = ${xrdb:foreground}
+primary = ${xrdb:color1:#6699CC}
+secondary = ${xrdb:color6:#C594C5}
+selected = ${xrdb:color3}
 alert = ${xrdb:color1:#EC5f67}
 
 [global/wm]
@@ -23,35 +24,36 @@ margin-bottom = 5
 [bar/top]
 monitor = ${env:MONITOR:}
 width = 100%
-height = 27
+height = 30
 offset-x = 0
 offset-y = 0
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-overline-size = 2
-overline-color = #f00
-underline-size = 2
-underline-color = #00f
+overline-size = 0
+overline-color = ${colors.secondary}
+underline-size = 0
+underline-color = ${colors.secondary}
+line-size = 2
 
-border-bottom = 2
-border-bottom-color = #333
+border-bottom = 0
+border-bottom-color = ${colors.primary}
 
 spacing = 1
-padding-left = 0
+padding-left = 2
 padding-right = 2
 module-margin-left = 1
-module-margin-right = 2
+module-margin-right = 1
 
-;font-0 = fixed:pixelsize=10;0
-font-0 = Operator\ Mono:pixelsize=13:style=Regular
-font-1 = unifont:size=6:heavy:fontformat=truetype;-2
-font-2 = siji:pixelsize=10;0
+font-0 = Operator\ Mono:pixelsize=11;2:style=Regular
+font-1 = FontAwesome:size=10;3
+font-2 = Siji:pixelsize=10;0
+font-3 = icomoon\-feather:style=Regular:size=11;3
 
-modules-left = bspwm
-modules-center = xwindow
-modules-right =  memory cpu vpn pulseaudio date powermenu
+modules-left = bspwm bsp-create bspwm-mon
+;modules-center = xwindow
+modules-right =  memory cpu temperature eth pulseaudio date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -104,13 +106,16 @@ label-unmounted-foreground = ${colors.foreground-alt}
 [module/bspwm]
 type = internal/bspwm
 
-format = <label-state> <label-mode>
+format = <label-state>
 
 ws-icon-default = x
 
+;label-dimmed-foreground = ${colors.foreground-alt}
+
 label-focused = %index%
 label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.primary}
+label-focused-foreground = ${colors.foreground}
+label-focused-underline= ${colors.selected}
 label-focused-padding = 2
 
 label-occupied = %index%
@@ -121,8 +126,14 @@ label-urgent-background = ${colors.alert}
 label-urgent-padding = 2
 
 label-empty = %index%
-label-empty-foreground = ${colors.foreground-alt}
+;label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
+
+[module/bspwm-mon]
+type = internal/bspwm
+
+format = <label-monitor> <label-mode>
+
 
 label-monocle = "MON "
 label-tiled = "BSP "
@@ -135,62 +146,31 @@ label-sticky = "STKY "
 label-private = "PRVT "
 ;label-private-foreground = #bd2c40
 
+[module/bsp-create]
+type = custom/script
 
-[module/mpd]
-type = internal/mpd
-
-format-online = <label-song>  <icon-prev> <icon-seekb> <icon-stop> <toggle> <icon-seekf> <icon-next>  <icon-repeat> <icon-random>
-
-label-song-maxlen = 25
-label-song-ellipsis = true
-
-icon-prev = 
-icon-seekb = 
-icon-stop = 
-icon-play = 
-icon-pause = 
-icon-next = 
-icon-seekf = 
-
-icon-random = 
-icon-repeat = 
-
-toggle-on-foreground = ${colors.primary}
-toggle-off-foreground = #66
-
-[module/backlight]
-type = internal/xbacklight
-
-format = <label> <bar>
-label = BL
-
-bar-width = 10
-bar-indicator = │
-bar-indicator-foreground = #ff
-bar-indicator-font = 2
-bar-fill = ─
-bar-fill-font = 2
-bar-fill-foreground = #9f78e1
-bar-empty = ─
-bar-empty-font = 2
-bar-empty-foreground = ${colors.foreground-alt}
+format = ""
+;label = "+"
+exec = echo "+"
+click-left = $HOME/bin/bspwm-create-ws
+click-right = bspc desktop -r
 
 [module/cpu]
 type = internal/cpu
-interval = 2
-format-prefix = "CPU "
+interval = 1
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-;format-underline = #C0C5CE
-label = %percentage%
+format-underline = ${root.underline-color}
+label = %percentage%%
 
 [module/memory]
 type = internal/memory
-interval = 2
+interval = 5
 format = <label>
-format-prefix = "RAM "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-;format-underline = #C0C5CE
-label = %percentage_used%
+format-underline = ${root.underline-color}
+label = %percentage_used%%
 bar-used-width = 10
 bar-used-foreground-0 = #c1cb7f
 bar-used-foreground-1 = #d9c37f
@@ -205,29 +185,15 @@ bar-used-empty = □
 bar-used-empty-font = 2
 bar-used-empty-foreground = #99586e75
 
-[module/vpn]
-type = internal/network
-interface = tun0
-interval = 3.0
-
-format-connected =<label-connected>
-format-connected-underline = #99C794
-format-disconnected-underline = #EC5f67
-
-label-connected = VPN ON
-label-disconnected = VPN OFF
-label-disconnected-foreground = ${colors.foreground-alt}
-
-
 [module/eth]
 type = internal/network
-interface = enp0s3
-interval = 3.0
+interface = eno2
+interval = 1
 
 ;format-connected-underline = #C0C5CE
-format-connected-prefix = "IP "
-format-connected-foreground-foreground = ${colors.foreground-alt}
-label-connected = %local_ip%
+;format-connected-prefix = " "
+format-connected-foreground = ${colors.foreground-alt}
+label-connected =  %upspeed:8%  %downspeed:8%
 
 ;format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = %ifname% disconnected
@@ -237,15 +203,15 @@ label-disconnected-foreground = ${colors.foreground-alt}
 type = internal/date
 interval = 5
 
-date = %d/%m/%y
+date = %a %d/%m/%y
 date-alt = " %Y-%m-%d"
 
-time = %H:%M
+time = %I:%M%P
 time-alt = %H:%M:%S
 
-format-prefix =
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-;format-underline = #C0C5CE
+format-underline = ${root.underline-color}
 
 label = %date% %time%
 
@@ -255,7 +221,7 @@ type = internal/pulseaudio
 
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
 ; If not, uses default sink
-sink = alsa_output.usb-Burr-Brown_from_TI_USB_audio_CODEC-00.analog-stereo
+;sink = alsa_output.pci-0000_00_1f.3.analog-surround-51
 
 ; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
 ; Default: true
@@ -265,92 +231,49 @@ use-ui-max = false
 ; Default: 5
 interval = 5
 
-format-volume = <ramp-volume> <label-volume>
+format-volume = <ramp-volume><label-volume>
+format-volume-underline = ${root.underline-color}
+format-ramp-underline = ${root.underline-color}
+format-ramp-foreground = ${colors.foreground-alt}
+format-muted-underline = ${root.underline-color}
+ramp-volume-0 = 
+ramp-volume-1 = 
+ramp-volume-2 = 
 
-[module/volume]
-type = internal/volume
+label-muted = " mute"
 
-format-volume = <label-volume> <bar-volume>
-label-volume = VOL
-label-volume-foreground = ${root.foreground}
-
-format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
-
-bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
-bar-volume-foreground-5 = #f5a70a
-bar-volume-foreground-6 = #ff5555
-bar-volume-gradient = false
-bar-volume-indicator = │
-bar-volume-indicator-font = 2
-bar-volume-indicator-foreground = #ff
-bar-volume-fill = ─
-bar-volume-fill-font = 2
-bar-volume-empty = ─
-bar-volume-empty-font = 2
-bar-volume-empty-foreground = ${colors.foreground-alt}
-
-[module/battery]
-type = internal/battery
-battery = BAT0
-adapter = AC
-full-at = 98
-
-format-charging = <animation-charging> <label-charging>
-format-charging-underline = #ffb52a
-
-format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
-
-format-full-prefix = " "
-format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
 
 [module/temperature]
 type = internal/temperature
-thermal-zone = 0
+interval = 1
+thermal-zone = 2 
 warn-temperature = 60
 
-format = <ramp> <label>
-format-underline = #f50a4d
-format-warn = <ramp> <label-warn>
+format = <label>
+format-underline = ${root.underline-color}
+format-warn = <ramp><label-warn>
 format-warn-underline = ${self.format-underline}
 
 label = %temperature%
 label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
 
-ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
 ramp-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
 type = custom/menu
 
-label-open =  power
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
+label-open = 
+label-open-foreground = ${colors.foreground-alt}
+label-close = 
+label-close-foreground = ${colors.foreground-alt}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
+
+format-underline = ${root.underline-color}
 
 menu-0-0 = reboot
 menu-0-0-exec = menu-open-1
@@ -367,4 +290,5 @@ menu-2-0-exec = poweroff
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
 
-; vim:ft=dosini
+; vim: set syntax=dosini:
+
