@@ -63,6 +63,8 @@ set expandtab
 " 2 spaces
 set tabstop=2
 set shiftwidth=2
+" Read modeline
+set modeline
 
 set t_Co=256
 colorscheme OceanicNext
